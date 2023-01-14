@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://shaders/fog.gdshader" type="Shader" id=1]
+
+[sub_resource type="QuadMesh" id=1]
+size = Vector2( 200, 200 )
+
+[sub_resource type="MultiMesh" id=2]
+instance_count = 3
+mesh = SubResource( 1 )
+transform_2d_array = PoolVector2Array( 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/color = Vector3( 0.394, 0.4, 0.409 )
+shader_param/OCTAVES = 4
+shader_param/velocity = 1.25
+shader_param/mul = 20.0
+shader_param/smooth_pixels = 50.0
+
+[sub_resource type="QuadMesh" id=4]
+size = Vector2( 500, 500 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="."]
+position = Vector2( 489.556, 279.288 )
+multimesh = SubResource( 2 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="MultiMeshInstance2D"]
+material = SubResource( 3 )
+position = Vector2( -476.355, 29.1441 )
+mesh = SubResource( 4 )

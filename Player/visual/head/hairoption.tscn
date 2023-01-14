@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/hair/perruque/perruque_brown_spr.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Player/visual/hair/faceshape.png" type="Texture" id=2]
+
+[node name="option" type="Button"]
+margin_right = 90.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="head" type="Sprite" parent="."]
+position = Vector2( 43.75, 46.5 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+
+[node name="texture" type="AnimatedSprite" parent="."]
+position = Vector2( 48.1768, 46.2111 )
+scale = Vector2( 4, 4 )
+frames = ExtResource( 1 )
+animation = "front"

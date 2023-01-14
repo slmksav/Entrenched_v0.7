@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/addons/kenney_particle_pack/smoke_01.png" type="Texture" id=1]
+
+[sub_resource type="Curve" id=1]
+max_value = 4.0
+_data = [ Vector2( 0, 0.0181818 ), 0.0, 0.0, 0, 0, Vector2( 0.494012, 0.527273 ), 1.90517, 1.90517, 0, 0, Vector2( 1, 2.96818 ), 4.27451, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.172917, 0.5209, 0.707395, 0.927083, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.231373, 1, 1, 1, 0.85098, 0.427451, 0.427451, 0.427451, 0.768627, 0, 0, 0, 0.415686, 0, 0, 0, 0.180392 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends CPUParticles2D
+
+func _ready():
+	emitting = true
+	yield(get_tree().create_timer(lifetime + 1), \"timeout\")
+	queue_free()
+"
+
+[node name="ShootSmoke" type="CPUParticles2D"]
+amount = 40
+lifetime = 16.0
+explosiveness = 0.8
+randomness = 1.0
+lifetime_randomness = 0.8
+local_coords = false
+texture = ExtResource( 1 )
+flag_align_y = true
+spread = 2.0
+gravity = Vector2( 0, -0.2 )
+initial_velocity = 5.0
+damping = 0.4
+scale_amount = 0.05
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+script = SubResource( 3 )

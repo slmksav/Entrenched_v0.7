@@ -1,0 +1,609 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/visualtree.tscn" type="PackedScene" id=2]
+[ext_resource path="res://inventory/hotbar/images/leftslot.png" type="Texture" id=3]
+[ext_resource path="res://inventory/hotbar/images/middleslot.png" type="Texture" id=4]
+[ext_resource path="res://inventory/Inventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/SyncNodePlayer.gd" type="Script" id=6]
+[ext_resource path="res://inventory/playerinventory.gd" type="Script" id=7]
+[ext_resource path="res://inventory/Inventorytrade.gd" type="Script" id=8]
+[ext_resource path="res://inventory/hotbar/hotbar.gd" type="Script" id=9]
+[ext_resource path="res://inventory/hotbar/weaponslot.tscn" type="PackedScene" id=10]
+[ext_resource path="res://inventory/hotbar/vertical/up.png" type="Texture" id=11]
+[ext_resource path="res://UI/HeartUIFull.png" type="Texture" id=12]
+[ext_resource path="res://UI/HungerUI.png" type="Texture" id=13]
+[ext_resource path="res://World/DayCycle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://inventory/playerinventory.tres" type="Resource" id=15]
+[ext_resource path="res://inventory/ItemContainer.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Player/visual/cosmetics.gd" type="Script" id=17]
+[ext_resource path="res://inventory/armors/armorslots.gd" type="Script" id=18]
+[ext_resource path="res://inventory/hotbar/armor/armorslot.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Music and Sounds/character_stab_impact_1.ogg" type="AudioStream" id=20]
+[ext_resource path="res://inventory/hotbar/vertical/middleslot.png" type="Texture" id=21]
+[ext_resource path="res://Player/raced.gd" type="Script" id=22]
+[ext_resource path="res://Music and Sounds/character_impact_1_halberd.ogg" type="AudioStream" id=23]
+[ext_resource path="res://UI/aligners/aligner.gd" type="Script" id=24]
+[ext_resource path="res://inventory/visual/basicrect.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Effects/DeadParticles.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Music and Sounds/conditions/puke_3.wav" type="AudioStream" id=27]
+
+[sub_resource type="Gradient" id=17]
+colors = PoolColorArray( 0.211765, 0.215686, 0.0431373, 1, 0.215686, 0.0431373, 0.0431373, 1 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.51636, 2.35604 )
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform bool gray_effect = false;
+uniform float alpha_gray_screen: hint_range(0.0, 1.0) = 0;
+
+uniform int amount_blur;
+uniform vec2 center;
+uniform float lgt;
+uniform float lod;
+
+
+uniform float amount_chromatic: hint_range(0.0, 5.0) = 0;
+
+
+vec4 gray_screen(vec4 color) {
+	color.rgb = vec3(color.r + color.g + color.b) / 3.0;
+	color.a = alpha_gray_screen;
+	return color;
+}
+
+
+
+vec4 blur_effect(sampler2D _texture, vec2 uv) {
+	vec4 col;
+	
+	if (lod < 0.0) {
+		col = texture(_texture, uv);
+		
+		for (int i = 1; i <= amount_blur; i++) {
+			float temp = lgt * float(i);
+			vec2 px = uv * (1.0 - temp) + center * temp;
+			col += texture(_texture, px);
+		}
+		
+	} else {
+		col = textureLod(_texture, uv, lod);
+		
+		for (int i = 1; i <= amount_blur; i++) {
+			float temp = lgt * float(i);
+			vec2 px = uv * (1.0 - temp) + center * temp;
+			col += textureLod(_texture, px, lod);
+		}
+	}
+	
+	
+	return col / float(amount_blur + 1);
+}
+
+
+vec4 chromatic_aberration(sampler2D _texture, vec2 uv) {
+	vec4 color;
+	
+	float adjusted_amount = amount_chromatic * texture(_texture, uv).r / 100.0;
+	color.g = texture(_texture, uv).g;
+	color.r = texture(_texture, vec2(uv.x + adjusted_amount, uv.y)).r;
+	color.b = texture(_texture, vec2(uv.x - adjusted_amount, uv.y)).b;
+	
+	return color;
+}
+
+
+void fragment() {
+	
+	vec4 color = blur_effect(SCREEN_TEXTURE, SCREEN_UV);
+	
+	if (gray_effect) color = gray_screen(color);
+	 
+	
+	COLOR = color;
+	
+}
+
+
+"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/gray_effect = true
+shader_param/alpha_gray_screen = 0.0
+shader_param/amount_blur = 2
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/lgt = 0.0
+shader_param/lod = 0.0
+shader_param/amount_chromatic = 0.0
+
+[sub_resource type="Animation" id=4]
+length = 0.2
+step = 0.001
+
+[sub_resource type="Animation" id=5]
+resource_name = "low_health"
+length = 2.0
+step = 0.01
+
+[sub_resource type="Animation" id=6]
+resource_name = "death"
+length = 0.55
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("visual:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("visual:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.498039, 0.345098, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("visual:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.55 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 22, 68, 11 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 68, 11 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 11, 68, 11 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 22, 68, 11 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 68, 11 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 11, 68, 11 )
+
+[sub_resource type="OccluderPolygon2D" id=13]
+polygon = PoolVector2Array( -4.5422, -3.01463, -4.58639, -0.119907, 5.44569, -0.208297, 5.40149, -3.12511 )
+
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.504545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 90.0
+gravity = Vector3( 0, 200, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.5
+angular_velocity = 360.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 20.0
+scale = 1.5
+scale_random = 1.0
+scale_curve = SubResource( 15 )
+color = Color( 0.211765, 0.215686, 0.0431373, 1 )
+hue_variation = 0.15
+hue_variation_random = 1.0
+
+[node name="player" type="KinematicBody2D"]
+scale = Vector2( 0.921152, 0.958698 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -15.9088 ]
+}
+PunchSounds = [ ExtResource( 20 ) ]
+CutSounds = [ ExtResource( 23 ) ]
+hitboxes = [ NodePath("visual/chest/head/hit"), NodePath("visual/chest/hit") ]
+defmovespeed = 70.0
+infected = true
+sick = 85.0
+default_sick_cooldown = 0.2
+puke_sounds = [ ExtResource( 27 ) ]
+max_puke_interval = 3.0
+min_puke_interval = 1.0
+puke_gradient = SubResource( 17 )
+inputpriority = 4
+
+[node name="col" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1.08456 )
+shape = SubResource( 1 )
+
+[node name="PukeSound" type="AudioStreamPlayer2D" parent="."]
+max_distance = 500.0
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0.644881, -6.99449 )
+max_distance = 500.0
+
+[node name="StabSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 4.01811, -5.60551 )
+stream = ExtResource( 20 )
+max_distance = 500.0
+
+[node name="visual" parent="." instance=ExtResource( 2 )]
+light_mask = 2
+position = Vector2( 0, -5.165 )
+roundvec = true
+player_cosmetics = {
+"aimingeye": false,
+"angried": false,
+"diseased": true
+}
+
+[node name="blink" parent="visual/chest/head" index="3"]
+frame = 39
+
+[node name="cosmetics" parent="visual/chest/head" index="4"]
+script = ExtResource( 17 )
+ispreference = [ "monocle" ]
+
+[node name="aimingeye" parent="visual/chest/head/cosmetics" index="0"]
+visible = false
+
+[node name="angried" parent="visual/chest/head/cosmetics" index="1"]
+visible = false
+
+[node name="hit" parent="visual/chest/head" index="9"]
+totarget = NodePath("../../../..")
+
+[node name="hit" parent="visual/chest" index="2"]
+totarget = NodePath("../../..")
+
+[node name="hand" parent="visual" index="2"]
+script = ExtResource( 22 )
+
+[node name="day_cycle_container" type="Node2D" parent="."]
+z_index = 6
+
+[node name="DayCycle" parent="day_cycle_container" instance=ExtResource( 14 )]
+color = Color( 0.894653, 0.84192, 0.764444, 1 )
+
+[node name="screen_effects_container" type="Node2D" parent="."]
+z_index = 5
+
+[node name="ScreenEffects" type="ColorRect" parent="screen_effects_container"]
+material = SubResource( 3 )
+margin_left = -511.174
+margin_top = -300.0
+margin_right = 512.826
+margin_bottom = 300.0
+rect_min_size = Vector2( 1024, 600 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="screen_animation_player" type="AnimationPlayer" parent="screen_effects_container"]
+anims/hit = SubResource( 4 )
+anims/low_health = SubResource( 5 )
+
+[node name="DeathAnim" type="AnimationPlayer" parent="."]
+anims/death = SubResource( 6 )
+
+[node name="DeadParticles" parent="." instance=ExtResource( 26 )]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="armor" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -683.0
+margin_bottom = -400.0
+rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="health" type="Control" parent="UI" groups=["presentation"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -682.0
+margin_bottom = -400.0
+rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lifebar" type="TextureProgress" parent="UI/health"]
+margin_left = 1.66667
+margin_top = 1.66667
+margin_right = 69.6667
+margin_bottom = 12.6667
+value = 100.0
+texture_under = SubResource( 7 )
+texture_over = SubResource( 8 )
+texture_progress = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text" type="Label" parent="UI/health/lifebar"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 41.0
+margin_bottom = 16.0
+rect_scale = Vector2( 0.5, 0.5 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI/health/lifebar"]
+
+[node name="hunger" type="TextureProgress" parent="UI/health"]
+margin_left = 1.66667
+margin_top = 14.0
+margin_right = 69.6667
+margin_bottom = 29.0
+min_value = 3500.0
+max_value = 13500.0
+value = 13500.0
+texture_under = SubResource( 10 )
+texture_over = SubResource( 11 )
+texture_progress = SubResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text" type="Label" parent="UI/health/hunger"]
+margin_left = 5.0
+margin_top = 3.0
+margin_right = 29.0
+margin_bottom = 17.0
+rect_scale = Vector2( 0.5, 0.5 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI/health/hunger"]
+
+[node name="center" type="Node2D" parent="UI"]
+position = Vector2( 512.826, 264 )
+script = ExtResource( 24 )
+sety = true
+setx = true
+getcamera = false
+scaleview = Vector2( 0.5, 0.5 )
+
+[node name="inventorycontainer" type="Control" parent="UI/center" groups=["presentation"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.52588e-05
+margin_top = 3.0
+margin_right = -1.52588e-05
+margin_bottom = 3.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="inventory" parent="UI/center/inventorycontainer" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -113.92
+margin_top = -133.341
+margin_right = 197.081
+margin_bottom = 263.659
+rect_scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 7 )
+hasaction = true
+action = 1
+custom_inventory = ExtResource( 15 )
+item_node = ExtResource( 16 )
+totrade = NodePath("../../../lefty/comparer")
+
+[node name="right" type="Node2D" parent="UI"]
+position = Vector2( 1026, 300 )
+script = ExtResource( 24 )
+sety = true
+setx = true
+getcamera = false
+scaleview = Vector2( 1, 0.5 )
+
+[node name="basicrect" parent="UI/right" instance=ExtResource( 25 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -260.851
+margin_top = -72.8704
+margin_right = -10.8512
+margin_bottom = 281.13
+rect_scale = Vector2( 0.472081, 0.472081 )
+
+[node name="list" type="VBoxContainer" parent="UI/right"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -202.515
+margin_top = -62.7408
+margin_right = -178.515
+margin_bottom = 9.25921
+rect_scale = Vector2( 2.04862, 2.04862 )
+custom_constants/separation = 0
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="head" parent="UI/right/list" instance=ExtResource( 19 )]
+texture = ExtResource( 11 )
+patch_margin_top = 5
+patch_margin_bottom = 0
+
+[node name="body" parent="UI/right/list" instance=ExtResource( 19 )]
+margin_top = 24.0
+margin_bottom = 48.0
+texture = ExtResource( 21 )
+patch_margin_bottom = 0
+place = 1
+
+[node name="feet" parent="UI/right/list" instance=ExtResource( 19 )]
+margin_top = 48.0
+margin_bottom = 72.0
+
+[node name="lefty" type="Node2D" parent="UI"]
+position = Vector2( 188.871, 264 )
+scale = Vector2( 0.921152, 0.958698 )
+z_index = 25
+script = ExtResource( 24 )
+sety = true
+setx = true
+getcamera = false
+scaleview = Vector2( 0.3, 0.5 )
+
+[node name="comparer" parent="UI/lefty" instance=ExtResource( 5 )]
+margin_left = -109.629
+margin_top = -138.056
+margin_right = 228.371
+margin_bottom = 304.944
+rect_scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 8 )
+hasaction = true
+item_node = ExtResource( 16 )
+
+[node name="bottom" type="Node2D" parent="UI"]
+position = Vector2( 513.308, 600 )
+scale = Vector2( 3, 3 )
+z_as_relative = false
+script = ExtResource( 24 )
+sety = true
+setx = true
+getcamera = false
+scaleview = Vector2( 0.5, 1 )
+
+[node name="list" type="HBoxContainer" parent="UI/bottom"]
+margin_left = -60.0
+margin_top = -29.3393
+margin_right = 60.0
+margin_bottom = -5.33928
+custom_constants/separation = 0
+alignment = 1
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tohand = NodePath("../../../visual/hand")
+visual = NodePath("../../../visual")
+
+[node name="slot" parent="UI/bottom/list" instance=ExtResource( 10 )]
+texture = ExtResource( 3 )
+patch_margin_left = 4
+patch_margin_right = 0
+
+[node name="slot2" parent="UI/bottom/list" instance=ExtResource( 10 )]
+margin_left = 24.0
+margin_right = 48.0
+texture = ExtResource( 4 )
+patch_margin_right = 0
+
+[node name="slot3" parent="UI/bottom/list" instance=ExtResource( 10 )]
+margin_left = 48.0
+margin_right = 72.0
+texture = ExtResource( 4 )
+patch_margin_right = 0
+
+[node name="slot4" parent="UI/bottom/list" instance=ExtResource( 10 )]
+margin_left = 72.0
+margin_right = 96.0
+texture = ExtResource( 4 )
+patch_margin_right = 0
+
+[node name="slot5" parent="UI/bottom/list" instance=ExtResource( 10 )]
+margin_left = 96.0
+margin_right = 120.0
+
+[node name="SyncNode" type="Node" parent="."]
+script = ExtResource( 6 )
+_target = NodePath("..")
+sync_global_position = true
+delete_nodes_is_clients = [ NodePath("../day_cycle_container"), NodePath("../health"), NodePath("../screen_effects_container"), NodePath("../armor"), NodePath("../inventorycontainer") ]
+
+[node name="DeathAnim" type="AnimationPlayer" parent="."]
+anims/death = SubResource( 6 )
+
+[node name="DeadParticles" parent="." instance=ExtResource( 26 )]
+
+[node name="UI" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 13 )
+
+[node name="PukeParticles" type="Particles2D" parent="."]
+position = Vector2( 0.5, -11.7 )
+emitting = false
+amount = 50
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.3
+randomness = 0.5
+local_coords = false
+process_material = SubResource( 16 )
+
+[connection signal="ready" from="." to="UI/right/list" method="_on_player_ready"]
+[connection signal="ready" from="." to="UI/bottom/list" method="_on_player_ready"]
+[connection signal="walking" from="visual" to="visual/floordect" method="walking"]
+[connection signal="tween_completed" from="UI/health/hunger/Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="selectindex" from="UI/center/inventorycontainer/inventory" to="UI/right/list" method="_on_inventory_selectindex"]
+[connection signal="visibility_changed" from="UI/center/inventorycontainer/inventory" to="UI/bottom/list" method="_on_inventory_visibility_changed"]
+
+[editable path="visual"]

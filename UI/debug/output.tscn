@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/debug/output.gd" type="Script" id=1]
+[ext_resource path="res://UI/debug/output.png" type="Texture" id=2]
+
+[node name="return" type="Button"]
+margin_right = 12.0
+margin_bottom = 20.0
+icon = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

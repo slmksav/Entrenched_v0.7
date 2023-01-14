@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://World/DayCycle.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "day_cycle"
+length = 24.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 7, 12, 14, 17.4, 22, 24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.1065, 0.1065, 0.15, 1 ), Color( 0.10725, 0.105, 0.15, 1 ), Color( 0.792157, 0.803922, 0.937255, 1 ), Color( 1, 1, 1, 1 ), Color( 0.839216, 0.839216, 0.85098, 1 ), Color( 1, 0.847059, 0.6, 1 ), Color( 0.10725, 0.105, 0.15, 1 ), Color( 0.10725, 0.105, 0.15, 1 ) ]
+}
+
+[node name="DayCycle" type="CanvasModulate" groups=[
+"day_cycle",
+]]
+color = Color( 0.994609, 0.994609, 0.995003, 1 )
+script = ExtResource( 1 )
+
+[node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "day_cycle"
+playback_speed = 0.04
+anims/day_cycle = SubResource( 1 )

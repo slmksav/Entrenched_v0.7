@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ItemContainer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://inventory/inventory_display.gd" type="Script" id=2]
+[ext_resource path="res://player_inventory.tres" type="Resource" id=3]
+[ext_resource path="res://inv.png" type="Texture" id=4]
+
+[node name="Inventory" type="MarginContainer"]
+margin_left = 107.0
+margin_top = 83.0
+margin_right = 559.0
+margin_bottom = 505.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+inventory = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 452.0
+margin_bottom = 422.0
+
+[node name="Panel" type="TextureRect" parent="Control"]
+margin_left = -55.0
+margin_top = -62.0
+margin_right = 473.0
+margin_bottom = 458.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 452.0
+margin_bottom = 422.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 442.0
+margin_bottom = 412.0
+
+[node name="ItemsVBox" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+margin_right = 315.0
+margin_bottom = 50.0
+
+[node name="ItemContainer" parent="MarginContainer/ScrollContainer/ItemsVBox" instance=ExtResource( 1 )]

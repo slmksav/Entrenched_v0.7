@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=2]
+
+[node name="Enemy3" instance=ExtResource( 2 )]
+
+[node name="visual" parent="." index="8"]
+frame = 6
+
+[editable path="visual"]

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://inventory/hotbar/onhanditem.gd" type="Script" id=1]
+[ext_resource path="res://weapons/scenes/torch.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons/torch/torch_on.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 27, 52 )
+
+[resource]
+script = ExtResource( 1 )
+cost = 1
+icon = SubResource( 1 )
+name = "torch"
+weight = 1.0
+amount = 1
+maxamount = 5
+sellable = false
+onhand = ExtResource( 2 )
+overhead = false

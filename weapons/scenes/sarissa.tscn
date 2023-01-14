@@ -1,0 +1,265 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://weapons/axe.gd" type="Script" id=1]
+[ext_resource path="res://Player/handspr.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons/sarissa1.png" type="Texture" id=3]
+[ext_resource path="res://Music and Sounds/long_weapons/long_weapon_thrust_effect.wav" type="AudioStream" id=4]
+[ext_resource path="res://weapons/melee/meleeplayer.gd" type="Script" id=5]
+[ext_resource path="res://Entities/damager/damager.gd" type="Script" id=6]
+[ext_resource path="res://weapons/generalsprites/impact.png" type="Texture" id=7]
+[ext_resource path="res://weapons/generalsprites/impactspr.gd" type="Script" id=8]
+[ext_resource path="res://weapons/scenes/body.gd" type="Script" id=9]
+[ext_resource path="res://Music and Sounds/long_weapons/wood_clash.wav" type="AudioStream" id=10]
+[ext_resource path="res://Music and Sounds/long_weapons/clash_1.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Music and Sounds/long_weapons/clash_2.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Music and Sounds/long_weapons/clash_3.mp3" type="AudioStream" id=13]
+[ext_resource path="res://weapons/scenes/sfx.gd" type="Script" id=14]
+
+[sub_resource type="Animation" id=1]
+resource_name = "getready"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 270.0, 180.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, -1 ), Vector2( -5, 0 ) ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 2.36779
+height = 2.80792
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 18.9912, 1.54527 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4.70892, 2.9996 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 26.9125, 3.0161 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 6.44148, 5.45006 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 1.07031, 3.79526 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 26.2014, 0.557974 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 1.19261, 27.8938 )
+
+[node name="sarissa" type="Node2D"]
+rotation = 4.71239
+script = ExtResource( 1 )
+onplayer = ExtResource( 5 )
+shapes = [ NodePath("body/col"), NodePath("body/damager/col") ]
+hand = NodePath("body/hand")
+anim = NodePath("anims")
+anim_deploy_weapon = "getready"
+thrustsound = ExtResource( 4 )
+hitboxs = [ NodePath("body/col") ]
+maxdistance = 20.0
+
+[node name="anims" type="AnimationPlayer" parent="."]
+anims/getready = SubResource( 1 )
+
+[node name="body" type="KinematicBody2D" parent="."]
+position = Vector2( 1, -1 )
+collision_layer = 32
+collision_mask = 32
+script = ExtResource( 9 )
+torightrays = [ NodePath("down"), NodePath("down2") ]
+toleftrays = [ NodePath("up"), NodePath("up2") ]
+metal = [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ]
+wood = [ ExtResource( 10 ) ]
+rotspeed = 0.8
+rayperrot = 25.0
+maxrot = 0.2
+minrot = -0.1
+diftolerance = 0.01
+bounciness = 12.0
+defaultimpact = 10.0
+defaultinersia = 1.0
+inersiaperframe = 1.0
+rotfix = 0.1
+
+[node name="spr" type="Sprite" parent="body"]
+position = Vector2( 23.6355, 1.02818e-06 )
+rotation = 1.5708
+texture = ExtResource( 3 )
+
+[node name="audio" type="AudioStreamPlayer2D" parent="body"]
+stream = ExtResource( 4 )
+
+[node name="damager" type="Area2D" parent="body"]
+position = Vector2( 48.4062, -4.2318e-06 )
+monitoring = false
+script = ExtResource( 6 )
+type = 2
+damage = 9
+
+[node name="col" type="CollisionShape2D" parent="body/damager"]
+position = Vector2( 0.00645447, -0.171448 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="col" type="CollisionShape2D" parent="body"]
+position = Vector2( 33.3233, 0.0966997 )
+shape = SubResource( 3 )
+
+[node name="tween" type="Tween" parent="body"]
+
+[node name="pikeend" type="Area2D" parent="body"]
+position = Vector2( 47.9271, 0.607868 )
+collision_layer = 32
+collision_mask = 32
+
+[node name="col" type="CollisionShape2D" parent="body/pikeend"]
+visible = false
+position = Vector2( 1.32427, -0.853734 )
+shape = SubResource( 5 )
+
+[node name="masscenter" type="Position2D" parent="body"]
+position = Vector2( 28.1907, 0.157467 )
+
+[node name="downimpact" type="Sprite" parent="body"]
+position = Vector2( 49.7093, -3.17924 )
+rotation = 1.42103
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="upimpact" type="Sprite" parent="body"]
+position = Vector2( 50.3757, 3.53799 )
+rotation = 3.25024
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="impacttimer" type="Timer" parent="body"]
+wait_time = 0.37
+
+[node name="wood" type="Area2D" parent="body"]
+collision_layer = 32
+collision_mask = 32
+
+[node name="col" type="CollisionShape2D" parent="body/wood"]
+visible = false
+position = Vector2( 17.1767, 0.378038 )
+shape = SubResource( 7 )
+
+[node name="metal" type="Area2D" parent="body"]
+position = Vector2( 48.3461, 0.828667 )
+collision_layer = 32
+collision_mask = 32
+
+[node name="col" type="CollisionShape2D" parent="body/metal"]
+visible = false
+position = Vector2( 0.446289, -0.671161 )
+shape = SubResource( 8 )
+
+[node name="hand" parent="body" instance=ExtResource( 2 )]
+position = Vector2( 3.54225, 0.183435 )
+
+[node name="down" type="RayCast2D" parent="body"]
+position = Vector2( 48.7497, -1.37764 )
+enabled = true
+cast_to = Vector2( 0, -10 )
+collision_mask = 32
+
+[node name="up" type="RayCast2D" parent="body"]
+position = Vector2( 48.7891, 1.42334 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 32
+
+[node name="down2" type="RayCast2D" parent="body"]
+position = Vector2( 16.165, -0.839764 )
+scale = Vector2( 1, 0.5 )
+enabled = true
+cast_to = Vector2( 0, -10 )
+collision_mask = 32
+
+[node name="up2" type="RayCast2D" parent="body"]
+position = Vector2( 16.165, 0.66193 )
+scale = Vector2( 1, 0.5 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 32
+
+[node name="front" type="Area2D" parent="body"]
+visible = false
+position = Vector2( 53.6714, -0.0478554 )
+rotation = -0.00318878
+collision_layer = 32
+collision_mask = 32
+
+[node name="col" type="CollisionShape2D" parent="body/front"]
+position = Vector2( 0.344044, 0.11765 )
+shape = SubResource( 9 )
+
+[node name="internalpike" type="Area2D" parent="body"]
+position = Vector2( 47.6758, -0.0331554 )
+collision_layer = 32
+collision_mask = 32
+
+[node name="col" type="CollisionShape2D" parent="body/internalpike"]
+position = Vector2( -23.3533, 0.0331116 )
+shape = SubResource( 10 )
+
+[node name="downarea" type="Area2D" parent="body"]
+position = Vector2( 27.6213, -2.79296 )
+collision_layer = 32
+collision_mask = 32
+
+[node name="col" type="CollisionShape2D" parent="body/downarea"]
+position = Vector2( -1.26202, -0.280119 )
+rotation = 1.5592
+shape = SubResource( 11 )
+
+[node name="uparea" type="Area2D" parent="body"]
+position = Vector2( 27.618, 4.40106 )
+collision_layer = 32
+collision_mask = 32
+
+[node name="col" type="CollisionShape2D" parent="body/uparea"]
+position = Vector2( -2.54339, -1.04149 )
+rotation = 1.56822
+shape = SubResource( 11 )
+
+[node name="stopattack" type="Timer" parent="."]
+wait_time = 0.386
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 14.265, -1.2503 )
+volume_db = 8.7
+script = ExtResource( 14 )
+volumebyaudio = {
+ExtResource( 4 ): 8.0,
+ExtResource( 13 ): 6.0,
+ExtResource( 10 ): 8.0,
+ExtResource( 11 ): 6.0,
+ExtResource( 12 ): 6.0
+}
+cooldown = 0.2
+
+[connection signal="body_entered" from="body/internalpike" to="body" method="_on_internalpike_body_entered"]

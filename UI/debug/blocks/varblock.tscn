@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/debug/output.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/debug/blocks/varblock.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.235294, 0.266667, 0.313726, 1 )
+
+[node name="varblock" type="Panel"]
+margin_right = 273.0
+margin_bottom = 47.0
+rect_pivot_offset = Vector2( 5.68765, -14.1174 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+typename = "var"
+
+[node name="move" type="Button" parent="."]
+margin_left = -9.31418
+margin_top = -8.43301
+margin_right = 38.6859
+margin_bottom = 11.567
+text = "move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="Button" parent="move"]
+margin_left = 41.1105
+margin_top = -14.8281
+margin_right = 60.1105
+margin_bottom = 5.1719
+text = "x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="value" type="LineEdit" parent="."]
+margin_left = 4.10909
+margin_top = 13.8819
+margin_right = 186.109
+margin_bottom = 37.8819
+placeholder_text = "value"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="return" parent="." instance=ExtResource( 1 )]
+margin_left = 264.352
+margin_top = 39.0264
+margin_right = 281.352
+margin_bottom = 59.0264
+rect_clip_content = true
+savename = "output"
+
+[node name="type" type="OptionButton" parent="."]
+margin_left = 194.406
+margin_top = 15.8239
+margin_right = 259.406
+margin_bottom = 35.8239
+text = "string"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="move/quit" to="." method="quit"]
+[connection signal="text_entered" from="value" to="." method="_on_value_text_entered"]
+[connection signal="needsfill" from="return" to="." method="_on_return_needsfill"]
+[connection signal="pressed" from="type" to="." method="_on_type_pressed"]

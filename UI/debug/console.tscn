@@ -1,0 +1,353 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://UI/debug/console.gd" type="Script" id=1]
+[ext_resource path="res://UI/debug/blocks/funcblock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/debug/blocks/varblock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/debug/blocks/arrayblock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/debug/message.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/debug/blocks/monitor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/debug/blocks/scriptblock.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/aligners/aligner.gd" type="Script" id=8]
+[ext_resource path="res://UI/debug/savesmart.gd" type="Script" id=9]
+[ext_resource path="res://UI/debug/loadsmart.gd" type="Script" id=10]
+[ext_resource path="res://UI/debug/remove.gd" type="Script" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
+
+[node name="console" type="Node2D"]
+position = Vector2( 1024.62, -1.63641 )
+script = ExtResource( 1 )
+funcblock = ExtResource( 2 )
+varblock = ExtResource( 3 )
+arrayblock = ExtResource( 4 )
+monitor = ExtResource( 6 )
+scriptblock = ExtResource( 7 )
+savedir = "user://lastset.json"
+message = ExtResource( 5 )
+
+[node name="back" type="Panel" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -450.0
+margin_bottom = 155.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scroll" type="ScrollContainer" parent="back"]
+margin_left = 8.0
+margin_top = 9.0
+margin_right = 127.0
+margin_bottom = 125.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="categorytick" type="VBoxContainer" parent="back/scroll"]
+margin_right = 72.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="default" type="CheckBox" parent="back/scroll/categorytick"]
+margin_right = 72.0
+margin_bottom = 24.0
+focus_mode = 0
+pressed = true
+text = "default"
+
+[node name="output" type="ScrollContainer" parent="back"]
+margin_left = 183.612
+margin_top = 6.0
+margin_right = 443.612
+margin_bottom = 126.0
+custom_styles/bg = SubResource( 1 )
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="box" type="VBoxContainer" parent="back/output"]
+
+[node name="newblocks" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -438.783
+margin_top = 180.203
+margin_right = -398.783
+margin_bottom = 220.203
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="downright" type="Node2D" parent="."]
+position = Vector2( -0.6698, 596.893 )
+z_index = 3
+z_as_relative = false
+script = ExtResource( 8 )
+sety = true
+getcamera = false
+useglobal = true
+
+[node name="hbox" type="HBoxContainer" parent="downright"]
+margin_left = -758.0
+margin_top = -40.0
+margin_right = -9.0
+margin_bottom = -11.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="savesmart" type="Button" parent="downright/hbox"]
+margin_left = 101.0
+margin_right = 142.0
+margin_bottom = 29.0
+text = "save"
+script = ExtResource( 9 )
+
+[node name="scroll" type="ScrollContainer" parent="downright/hbox/savesmart"]
+visible = false
+margin_left = -28.0
+margin_top = -97.0
+margin_right = 70.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="downright/hbox/savesmart/scroll"]
+margin_right = 45.0
+margin_bottom = 38.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="downright/hbox/savesmart/scroll/vbox"]
+margin_right = 45.0
+margin_bottom = 14.0
+text = "to slot:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="plus" type="Button" parent="downright/hbox/savesmart/scroll/vbox"]
+margin_top = 18.0
+margin_right = 45.0
+margin_bottom = 38.0
+text = "+"
+
+[node name="setname" type="LineEdit" parent="downright/hbox/savesmart"]
+visible = false
+margin_left = -164.0
+margin_top = -75.0
+margin_right = -43.0
+margin_bottom = -51.0
+placeholder_text = "slot name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="loadsmart" type="Button" parent="downright/hbox"]
+margin_left = 146.0
+margin_right = 185.0
+margin_bottom = 29.0
+text = "load"
+script = ExtResource( 10 )
+
+[node name="scroll" type="ScrollContainer" parent="downright/hbox/loadsmart"]
+margin_left = -28.0
+margin_top = -97.0
+margin_right = 70.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="downright/hbox/loadsmart/scroll"]
+margin_right = 45.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="downright/hbox/loadsmart/scroll/vbox"]
+margin_right = 45.0
+margin_bottom = 14.0
+text = "to slot:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="remove" type="Button" parent="downright/hbox"]
+margin_left = 189.0
+margin_right = 250.0
+margin_bottom = 29.0
+text = "remove"
+script = ExtResource( 11 )
+
+[node name="scroll" type="ScrollContainer" parent="downright/hbox/remove"]
+margin_left = -28.0
+margin_top = -97.0
+margin_right = 70.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="downright/hbox/remove/scroll"]
+margin_right = 28.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="downright/hbox/remove/scroll/vbox"]
+margin_right = 28.0
+margin_bottom = 14.0
+text = "slot:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="save" type="Button" parent="downright/hbox"]
+margin_left = 254.0
+margin_right = 373.0
+margin_bottom = 29.0
+focus_mode = 0
+text = "quick save setup"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="load" type="Button" parent="downright/hbox"]
+margin_left = 377.0
+margin_right = 483.0
+margin_bottom = 29.0
+focus_mode = 0
+text = "load last setup"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fromclip" type="Button" parent="downright/hbox"]
+margin_left = 487.0
+margin_right = 623.0
+margin_bottom = 29.0
+focus_mode = 0
+text = "load from clipboard"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="toclip" type="Button" parent="downright/hbox"]
+margin_left = 627.0
+margin_right = 749.0
+margin_bottom = 29.0
+text = "copy to clipboard"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clear" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -566.477
+margin_right = -452.477
+margin_bottom = 20.0
+focus_mode = 0
+text = "clear workspace"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clearcons" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -61.0455
+margin_top = 12.6799
+margin_right = -14.0455
+margin_bottom = 32.68
+focus_mode = 0
+text = "clear"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="new" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -306.75
+margin_top = 131.25
+margin_right = -3.75
+margin_bottom = 151.25
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text" type="Label" parent="new"]
+margin_left = 32.0
+margin_top = 3.0
+margin_right = 59.0
+margin_bottom = 17.0
+text = "add:"
+
+[node name="monitor" type="Button" parent="new"]
+margin_left = 63.0
+margin_right = 126.0
+margin_bottom = 20.0
+focus_mode = 0
+text = "monitor"
+
+[node name="func" type="Button" parent="new"]
+margin_left = 130.0
+margin_right = 169.0
+margin_bottom = 20.0
+focus_mode = 0
+text = "func"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="var" type="Button" parent="new"]
+margin_left = 173.0
+margin_right = 204.0
+margin_bottom = 20.0
+focus_mode = 0
+text = "var"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="array" type="Button" parent="new"]
+margin_left = 208.0
+margin_right = 251.0
+margin_bottom = 20.0
+focus_mode = 0
+text = "array"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="script" type="Button" parent="new"]
+margin_left = 255.0
+margin_right = 303.0
+margin_bottom = 20.0
+text = "script"
+
+[connection signal="pressed" from="downright/hbox/savesmart/scroll/vbox/plus" to="downright/hbox/savesmart" method="_on_plus_pressed"]
+[connection signal="text_entered" from="downright/hbox/savesmart/setname" to="downright/hbox/savesmart" method="_on_setname_text_entered"]
+[connection signal="pressed" from="downright/hbox/save" to="." method="savetofile" binds= [ "user://lastset.json" ]]
+[connection signal="pressed" from="downright/hbox/load" to="." method="loadfromfile" binds= [ "user://lastset.json" ]]
+[connection signal="pressed" from="downright/hbox/fromclip" to="." method="_on_fromclip_pressed"]
+[connection signal="pressed" from="downright/hbox/toclip" to="." method="_on_toclip_pressed"]
+[connection signal="pressed" from="clear" to="." method="clearwork"]
+[connection signal="pressed" from="clearcons" to="." method="_on_clearcons_pressed"]
+[connection signal="pressed" from="new/monitor" to="." method="_on_monitor_pressed"]
+[connection signal="pressed" from="new/func" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="new/var" to="." method="_on_var_pressed"]
+[connection signal="pressed" from="new/array" to="." method="_on_array_pressed"]
+[connection signal="pressed" from="new/script" to="." method="_on_script_pressed"]

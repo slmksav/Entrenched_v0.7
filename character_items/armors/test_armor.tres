@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://character_items/armors/armor.gd" type="Script" id=1]
+[ext_resource path="res://UI/inventory_icons/armor_helmet_icon.png" type="Texture" id=2]
+[ext_resource path="res://character_items/armors/firstarmor.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Music and Sounds/character_impact_1_halberd.ogg" type="AudioStream" id=4]
+
+[resource]
+script = ExtResource( 1 )
+cost = 10
+icon = ExtResource( 2 )
+name = "some armor"
+weight = 0.0
+amount = 1
+sellable = false
+helmet = ExtResource( 3 )
+hit_sound = ExtResource( 4 )
+defense = 0.75

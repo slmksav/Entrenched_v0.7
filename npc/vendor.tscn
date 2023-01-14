@@ -1,0 +1,203 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Player/chestonly.png" type="Texture" id=1]
+[ext_resource path="res://World/selectarea.tscn" type="PackedScene" id=2]
+[ext_resource path="res://npc/vendor.gd" type="Script" id=3]
+[ext_resource path="res://Player/visualtree.tscn" type="PackedScene" id=4]
+[ext_resource path="res://vendor/chest.png" type="Texture" id=5]
+[ext_resource path="res://vendor/hat.png" type="Texture" id=6]
+[ext_resource path="res://Player/headonly.png" type="Texture" id=7]
+[ext_resource path="res://vendor/head.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.843, 5.268 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 22.1465, 27.2204 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 117, 0, 13, 10 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 130, 0, 13, 10 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 143, 0, 13, 10 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 117, 0, 13, 10 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 130, 0, 13, 10 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 143, 0, 13, 10 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "front",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "side",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 7 )
+region = Rect2( 38, 0, 19, 19 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 7 )
+region = Rect2( 19, 0, 19, 19 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 10 ) ],
+"loop": true,
+"name": "front",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 11 ) ],
+"loop": true,
+"name": "back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "side",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "side",
+"speed": 5.0
+} ]
+
+[node name="vendor" type="StaticBody2D"]
+position = Vector2( 0.526798, -0.348671 )
+script = ExtResource( 3 )
+
+[node name="col" type="CollisionShape2D" parent="."]
+position = Vector2( 0.795575, -2.58778 )
+shape = SubResource( 1 )
+
+[node name="selectarea" parent="." instance=ExtResource( 2 )]
+position = Vector2( 4.2568, -0.797493 )
+
+[node name="col" parent="selectarea" index="0"]
+position = Vector2( -4.76292, -17.6995 )
+shape = SubResource( 2 )
+
+[node name="hint" parent="selectarea" index="1"]
+position = Vector2( 58.3794, -59.0956 )
+
+[node name="key" parent="selectarea/hint" index="0"]
+anchor_left = 0.00459369
+anchor_top = -0.36118
+anchor_right = 0.00459369
+anchor_bottom = -0.36118
+margin_left = -44.0663
+margin_top = 15.4696
+margin_right = 23.9337
+margin_bottom = 29.4696
+
+[node name="visual" parent="." instance=ExtResource( 4 )]
+position = Vector2( -0.0171013, -6.9788 )
+scale = Vector2( -1, 1 )
+frames = SubResource( 9 )
+animation = "side"
+frame = 0
+playing = false
+offset = Vector2( 1, 1 )
+inputtest = Vector2( 1, 0 )
+active = true
+player_cosmetics = {
+"aimingeye": false,
+"angried": false,
+"diseased": false
+}
+onstart = Vector2( 1, 0 )
+
+[node name="chest" parent="visual" index="1"]
+position = Vector2( -1.66892, -1.26487 )
+
+[node name="head" parent="visual/chest" index="0"]
+position = Vector2( 1.64696, -12.0485 )
+frames = SubResource( 12 )
+animation = "side"
+playing = false
+offset = Vector2( 0, 2 )
+
+[node name="eyeright" parent="visual/chest/head" index="1"]
+visible = false
+position = Vector2( -0.5, 1.5 )
+
+[node name="eyeleft" parent="visual/chest/head" index="2"]
+visible = false
+position = Vector2( -5.5, 1.5 )
+
+[node name="blink" parent="visual/chest/head" index="3"]
+position = Vector2( -0.476632, 0.470962 )
+animation = "side"
+frame = 32
+
+[node name="hair" parent="visual/chest/head" index="4"]
+visible = false
+playing = true
+
+[node name="facialhair" parent="visual/chest/head" index="5"]
+position = Vector2( -0.5, 3 )
+animation = "side"
+playing = false
+
+[node name="accessory" parent="visual/chest/head" index="6"]
+animation = "side"
+playing = false
+
+[node name="aimingeye" parent="visual/chest/head/cosmetics" index="0"]
+visible = false
+animation = "right"
+
+[node name="angried" parent="visual/chest/head/cosmetics" index="1"]
+visible = false
+animation = "side"
+
+[node name="diseased" parent="visual/chest/head/cosmetics" index="2"]
+visible = false
+animation = "side"
+
+[node name="helmet" parent="visual/chest/head" index="8"]
+position = Vector2( -0.100524, -4.06802 )
+frames = SubResource( 13 )
+animation = "side"
+offset = Vector2( 1, -4 )
+
+[node name="spr" parent="visual/hand" index="0"]
+dorecolor = false
+
+[node name="sprite" parent="visual/hand/spr" index="0"]
+modulate = Color( 0.835294, 0.65098, 0.564706, 1 )
+
+[connection signal="interact" from="selectarea" to="." method="_on_selectarea_interact"]
+
+[editable path="selectarea"]
+[editable path="visual"]
+[editable path="visual/hand/spr"]

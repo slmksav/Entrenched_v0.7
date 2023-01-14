@@ -1,0 +1,117 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://inventory/ItemContainer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://inventory/inventory_display.gd" type="Script" id=2]
+[ext_resource path="res://inventory/visual/basicrect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://inventory/visual/dust.png" type="Texture" id=4]
+
+[node name="Inventory" type="Control"]
+margin_left = 107.0
+margin_top = 83.0
+margin_right = 441.0
+margin_bottom = 505.0
+mouse_filter = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="basicrect" parent="." instance=ExtResource( 3 )]
+margin_left = 130.752
+margin_top = -20.8024
+margin_right = 204.752
+margin_bottom = 3.19759
+rect_min_size = Vector2( 1, 1 )
+
+[node name="title" type="Label" parent="basicrect"]
+margin_left = 6.17224
+margin_top = 4.50027
+margin_right = 66.1722
+margin_bottom = 18.5003
+text = "inventory"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 340.0
+margin_bottom = 371.0
+rect_clip_content = false
+mouse_filter = 2
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemsVBox" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 300.0
+margin_bottom = 50.0
+
+[node name="ItemContainer" parent="ScrollContainer/ItemsVBox" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 300.0
+margin_bottom = 50.0
+
+[node name="action" type="Button" parent="."]
+margin_left = -145.254
+margin_top = 29.0104
+margin_right = -82.2544
+margin_bottom = 49.0104
+text = "sell/buy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="amount" type="SpinBox" parent="action"]
+margin_left = 71.0796
+margin_top = -1.06426
+margin_right = 145.08
+margin_bottom = 22.9358
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="balance" parent="." instance=ExtResource( 3 )]
+margin_left = 4.18921
+margin_top = -21.0809
+margin_right = 61.1892
+margin_bottom = -4.08095
+rect_min_size = Vector2( 1, 1 )
+
+[node name="balance" type="Label" parent="balance"]
+margin_left = 2.82254
+margin_top = 1.44128
+margin_right = 45.8225
+margin_bottom = 15.4413
+custom_colors/font_color = Color( 0.87451, 0.882353, 0, 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dust" parent="." instance=ExtResource( 3 )]
+margin_left = 78.5
+margin_top = 3.0
+margin_right = 261.5
+margin_bottom = 80.0
+
+[node name="TextureRect" type="TextureRect" parent="dust"]
+margin_left = 48.6263
+margin_top = 7.34966
+margin_right = 128.626
+margin_bottom = 48.3497
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="dust"]
+margin_left = 20.1954
+margin_top = 50.3358
+margin_right = 158.195
+margin_bottom = 64.3358
+text = "nothing but dust here"

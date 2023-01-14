@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Player/handspr.tscn" type="PackedScene" id=1]
+[ext_resource path="res://weapons/flag3_movement.png" type="Texture" id=2]
+[ext_resource path="res://weapons/scenes/flag3.gd" type="Script" id=3]
+[ext_resource path="res://inventory/hotbar/onhandscn.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=7]
+resource_name = "wave"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("hand:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -10.0, 10.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 2.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -5, -6.5 ), Vector2( -5, -9.5 ), Vector2( -5, -9.5 ), Vector2( -5, -6.5 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 75, 75 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 75, 0, 75, 75 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 150, 0, 75, 75 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 225, 0, 75, 75 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "wind",
+"speed": 2.0
+} ]
+
+[node name="flag3" type="Node2D"]
+script = ExtResource( 4 )
+hand = NodePath("hand")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/wave = SubResource( 7 )
+script = ExtResource( 3 )
+
+[node name="hand" parent="." instance=ExtResource( 1 )]
+position = Vector2( -5.35882, -6.6271 )
+
+[node name="sprite2" type="AnimatedSprite" parent="hand"]
+show_behind_parent = true
+position = Vector2( -0.641183, -19.3729 )
+frames = SubResource( 6 )
+animation = "wind"
+playing = true

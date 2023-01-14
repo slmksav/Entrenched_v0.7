@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://character_items/armors/armor.gd" type="Script" id=1]
+[ext_resource path="res://character_items/armors/visor/visoricon.png" type="Texture" id=2]
+[ext_resource path="res://character_items/armors/visor/visorspr.tres" type="SpriteFrames" id=3]
+
+[resource]
+script = ExtResource( 1 )
+cost = 3
+icon = ExtResource( 2 )
+name = "visor helmet"
+weight = 4.0
+amount = 1
+maxamount = 5
+sellable = false
+helmet = ExtResource( 3 )
+maxhp = 12.0
+standarddamage = 10
+hairwithhelmet = false
+defense = 0.0

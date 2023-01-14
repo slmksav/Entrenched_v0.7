@@ -1,0 +1,113 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Enemies/enemyhead.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Enemies/enemy.gd" type="Script" id=2]
+[ext_resource path="res://BehaviorTree/root.gd" type="Script" id=3]
+[ext_resource path="res://BehaviorTree/selector.gd" type="Script" id=4]
+[ext_resource path="res://BehaviorTree/leaves/is_node_nearby.gd" type="Script" id=5]
+[ext_resource path="res://BehaviorTree/leaves/move_to_node.gd" type="Script" id=6]
+[ext_resource path="res://BehaviorTree/leaves/find_nodes.gd" type="Script" id=7]
+[ext_resource path="res://BehaviorTree/leaves/get_closest_node.gd" type="Script" id=8]
+[ext_resource path="res://BehaviorTree/leaves/stop_moving.gd" type="Script" id=9]
+[ext_resource path="res://BehaviorTree/sequence.gd" type="Script" id=10]
+[ext_resource path="res://BehaviorTree/leaves/patrol.gd" type="Script" id=11]
+[ext_resource path="res://Player/visualtree.tscn" type="PackedScene" id=12]
+[ext_resource path="res://BehaviorTree/leaves/idle.gd" type="Script" id=14]
+[ext_resource path="res://BehaviorTree/decorators/inverter.gd" type="Script" id=15]
+[ext_resource path="res://Music and Sounds/character_impact_1_halberd.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Music and Sounds/character_stab_impact_1.ogg" type="AudioStream" id=17]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 6.14036, 12.9061 )
+
+[node name="Enemy" type="KinematicBody2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="col" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="BehaviorTree" type="Node" parent="."]
+script = ExtResource( 3 )
+enabled = true
+
+[node name="Selector" type="Node" parent="BehaviorTree"]
+script = ExtResource( 4 )
+
+[node name="follow player" type="Node" parent="BehaviorTree/Selector"]
+script = ExtResource( 10 )
+
+[node name="find player nodes" type="Node" parent="BehaviorTree/Selector/follow player"]
+script = ExtResource( 7 )
+target_group = "player"
+to_memory = "player_nodes"
+
+[node name="get closest player node" type="Node" parent="BehaviorTree/Selector/follow player"]
+script = ExtResource( 8 )
+from_memory = "player_nodes"
+to_memory = "player"
+
+[node name="is player nearby" type="Node" parent="BehaviorTree/Selector/follow player"]
+script = ExtResource( 5 )
+from_memory = "player"
+nearby_distance = 50
+
+[node name="move to player" type="Node" parent="BehaviorTree/Selector/follow player"]
+script = ExtResource( 6 )
+from_memory = "player"
+
+[node name="inverter" type="Node" parent="BehaviorTree/Selector"]
+script = ExtResource( 15 )
+
+[node name="idle" type="Node" parent="BehaviorTree/Selector/inverter"]
+script = ExtResource( 14 )
+wait_time = 120
+wait_chance = 0.001
+to_memory = "idle_time_left"
+
+[node name="patrol" type="Node" parent="BehaviorTree/Selector"]
+script = ExtResource( 11 )
+
+[node name="stop moving" type="Node" parent="BehaviorTree/Selector"]
+script = ExtResource( 9 )
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
+volume_db = -9.087
+max_distance = 200.0
+
+[node name="StabSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
+max_distance = 200.0
+
+[node name="damagearea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="col" type="CollisionShape2D" parent="damagearea"]
+position = Vector2( 0.743256, -13.2299 )
+shape = SubResource( 3 )
+
+[node name="visual" parent="." instance=ExtResource( 12 )]
+frame = 2
+
+[node name="head" parent="visual/chest" index="0"]
+frames = ExtResource( 1 )
+
+[connection signal="anim_update" from="." to="visual" method="updatesprite"]
+
+[editable path="visual"]

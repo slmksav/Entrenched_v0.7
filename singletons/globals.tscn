@@ -1,0 +1,55 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://inventory/playerinventory.tres" type="Resource" id=1]
+[ext_resource path="res://weapons/item/axe.tres" type="Resource" id=2]
+[ext_resource path="res://singletons/globals.gd" type="Script" id=3]
+[ext_resource path="res://weapons/item/sarissa.tres" type="Resource" id=4]
+[ext_resource path="res://weapons/item/arquebus.tres" type="Resource" id=5]
+[ext_resource path="res://character_items/armors/morion/morion.tres" type="Resource" id=6]
+[ext_resource path="res://character_items/armors/visor/visor.tres" type="Resource" id=7]
+[ext_resource path="res://character_items/armors/strawhat/strawhat.tres" type="Resource" id=8]
+[ext_resource path="res://foods/apple/apple.tres" type="Resource" id=9]
+[ext_resource path="res://foods/steak/steak.tres" type="Resource" id=10]
+[ext_resource path="res://foods/fruit bar/fruit bar.tres" type="Resource" id=11]
+[ext_resource path="res://foods/ham/ham.tres" type="Resource" id=12]
+[ext_resource path="res://weapons/item/flag3.tres" type="Resource" id=13]
+[ext_resource path="res://character_items/armors/morion2/morion2.tres" type="Resource" id=14]
+[ext_resource path="res://character_items/armors/rainhat/rainhat.tres" type="Resource" id=15]
+[ext_resource path="res://character_items/armors/coverhelmet/coverhelmet.tres" type="Resource" id=16]
+[ext_resource path="res://character_items/armors/noorhelm_open/noorhelm_open.tres" type="Resource" id=17]
+[ext_resource path="res://character_items/armors/noorhelm/noorhelm.tres" type="Resource" id=18]
+[ext_resource path="res://weapons/item/torch.tres" type="Resource" id=19]
+[ext_resource path="res://character_items/armors/dochat/dochat.tres" type="Resource" id=20]
+[ext_resource path="res://character_items/armors/morion3/moiron3.tres" type="Resource" id=21]
+[ext_resource path="res://foods/herb/herb.tres" type="Resource" id=22]
+
+[node name="globals" type="Node"]
+pause_mode = 2
+script = ExtResource( 3 )
+presentation_groups = PoolStringArray( "presentation" )
+consoleshorts = {
+"apple": ExtResource( 9 ),
+"arquebus": ExtResource( 5 ),
+"axe": ExtResource( 2 ),
+"coverhelmet": ExtResource( 16 ),
+"dochat": ExtResource( 20 ),
+"flag3": ExtResource( 13 ),
+"fruitbar": ExtResource( 11 ),
+"ham": ExtResource( 12 ),
+"herb": ExtResource( 22 ),
+"morion": ExtResource( 6 ),
+"morion2": ExtResource( 14 ),
+"morion3": ExtResource( 21 ),
+"noorhelm": ExtResource( 18 ),
+"noorhelm_open": ExtResource( 17 ),
+"playerinv": ExtResource( 1 ),
+"rainhat": ExtResource( 15 ),
+"sarissa": ExtResource( 4 ),
+"steak": ExtResource( 10 ),
+"strawhat": ExtResource( 8 ),
+"tocamera": "/root/GlobalWorld/world/player/camera",
+"torch": ExtResource( 19 ),
+"visor": ExtResource( 7 ),
+"world": ""
+}
+maps = [ "res://World.tscn" ]

@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/dialogue.gd" type="Script" id=1]
+[ext_resource path="res://UI/debug/console.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Effects/CinematicLayer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/diagoption.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/aligners/aligner.gd" type="Script" id=9]
+[ext_resource path="res://UI/camera.gd" type="Script" id=10]
+
+[node name="camera" type="Camera2D"]
+position = Vector2( -0.330727, -7.27115 )
+z_index = 10
+current = true
+script = ExtResource( 10 )
+relativeto = NodePath("../player")
+active = true
+distance = 20.0
+useresaxis = "max"
+transitionspeed = 6.0
+initresolution = Vector2( 280, 180 )
+
+[node name="shaketimer" type="Timer" parent="."]
+
+[node name="rect" type="ReferenceRect" parent="."]
+margin_left = -156.0
+margin_top = -67.0936
+margin_right = -156.0
+margin_bottom = -67.0936
+mouse_filter = 2
+border_color = Color( 0.411765, 0.117647, 0.796078, 1 )
+border_width = 1.8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="topleft" type="Node2D" parent="UI"]
+position = Vector2( -0.330727, -7.27115 )
+script = ExtResource( 9 )
+takeoffset = true
+
+[node name="label_fps" type="Label" parent="UI/topleft" groups=["presentation"]]
+margin_left = 0.330727
+margin_top = 97.8755
+margin_right = 39.3307
+margin_bottom = 111.875
+rect_scale = Vector2( 3, 3 )
+text = "fps:59"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back" type="Button" parent="UI/topleft"]
+visible = false
+margin_left = 16.838
+margin_top = 17.39
+margin_right = 57.8381
+margin_bottom = 37.39
+text = "back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="topright" type="Node2D" parent="UI"]
+position = Vector2( 1031.83, -1.33484 )
+script = ExtResource( 9 )
+setx = true
+getcamera = false
+
+[node name="console" parent="UI/topright" instance=ExtResource( 2 )]
+position = Vector2( -0.0749512, 0.29303 )
+z_index = 3
+bypress = true
+
+[node name="bottom" type="Node2D" parent="UI"]
+position = Vector2( 506, 600 )
+script = ExtResource( 9 )
+sety = true
+setx = true
+getcamera = false
+scaleview = Vector2( 0.5, 1 )
+
+[node name="dialoguer" type="Control" parent="UI/bottom"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -118.433
+margin_right = 6.0
+margin_bottom = -118.433
+rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+option = ExtResource( 8 )
+
+[node name="back" type="Panel" parent="UI/bottom/dialoguer"]
+margin_left = -82.3733
+margin_top = -16.8649
+margin_right = 83.6267
+margin_bottom = 20.1351
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="UI/bottom/dialoguer"]
+margin_left = -81.5858
+margin_top = -30.0555
+margin_right = -5.58578
+margin_bottom = -16.0555
+rect_scale = Vector2( 0.892343, 0.892343 )
+text = "talker name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="diag" type="Label" parent="UI/bottom/dialoguer"]
+margin_left = -79.0
+margin_top = -15.0
+margin_right = 153.0
+margin_bottom = 58.0
+rect_scale = Vector2( 0.41605, 0.41605 )
+text = "dialogue"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="optioncenter" type="GridContainer" parent="UI/bottom/dialoguer"]
+margin_left = 16.668
+margin_top = -8.24728
+margin_right = 126.668
+margin_bottom = 35.7527
+rect_scale = Vector2( 0.426553, 0.426553 )
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CinematicLayer" parent="." instance=ExtResource( 6 )]
+
+[connection signal="timeout" from="shaketimer" to="." method="_on_shaketimer_timeout"]

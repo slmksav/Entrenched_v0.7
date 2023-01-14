@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends damager
+enum effects{
+	instakill
+	damage
+	heal
+}
+export(effects) var effect=1
+export(bool) var apply_dmg_timer: bool = true
+var target: Player
+
+onready var rect: ColorRect = $ColorRect
+
+
+func _ready():
+	connect(\"body_entered\", self, \"_on_body_entered\")
+
+
+func _on_body_entered(body: PhysicsBody2D):
+	globals.logger(\"Check body is player\")
+	
+	if  not (body is Entity): return
+	
+	globals.logger(\"Select Option to\")
+	
+	match effect:
+		0:
+			globals.logger(\"Kill Target\")
+			body.force_death()
+		1:
+			body.damage(damage)
+		2:
+			globals.iprint([\"healed\",body.name],\"entities\")
+			body.restore_health(body.max_health)
+		
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 25.4805, 20.5252 )
+
+[node name="Damagetest" type="Area2D"]
+collision_layer = 16
+collision_mask = 18
+script = SubResource( 1 )
+
+[node name="col" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -25.2227
+margin_top = -20.6659
+margin_right = 24.7773
+margin_bottom = 20.3341
+mouse_filter = 2
+color = Color( 1, 0, 0, 0.423529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

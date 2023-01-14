@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/palm1.png-70caec2a1080195e58538b460f7117de.stex"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Palm" type="StaticBody2D" parent="."]
+position = Vector2( -0.17984, -0.0790634 )
+
+[node name="palm1" type="Sprite" parent="Palm"]
+position = Vector2( 0.943878, -62.4137 )
+scale = Vector2( 1, 1.00915 )
+texture = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Palm"]
+position = Vector2( 0.549885, -62.0597 )
+polygon = PoolVector2Array( -7, 52, 7, 52, 10, 58, 11, 62, 5, 62, -12, 62, -14, 60, -10, 57 )

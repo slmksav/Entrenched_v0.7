@@ -1,0 +1,670 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://UI/rightpressed.png" type="Texture" id=1]
+[ext_resource path="res://UI/right.png" type="Texture" id=2]
+[ext_resource path="res://Player/visualtree.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/visual/customize.gd" type="Script" id=4]
+[ext_resource path="res://UI/debug/console.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/aligners/aligner.gd" type="Script" id=6]
+[ext_resource path="res://Player/visual/categories.gd" type="Script" id=7]
+[ext_resource path="res://Player/visual/options.gd" type="Script" id=8]
+[ext_resource path="res://Player/visual/head/headoption.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Player/visual/headoptions.gd" type="Script" id=10]
+[ext_resource path="res://Player/visual/buttonswitch.gd" type="Script" id=11]
+[ext_resource path="res://Player/visual/headframe.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://Player/visual/hair/facial.gd" type="Script" id=13]
+[ext_resource path="res://Player/hair/facial hair/gentleman_black_spr.tres" type="SpriteFrames" id=14]
+[ext_resource path="res://Player/visual/hair/facialoption.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Player/accessories/monocle.tres" type="SpriteFrames" id=16]
+[ext_resource path="res://Player/visual/hair/faceshape.png" type="Texture" id=17]
+[ext_resource path="res://Player/visual/cosmetic.gd" type="Script" id=18]
+[ext_resource path="res://Player/visual/head/headoptions.gd" type="Script" id=24]
+[ext_resource path="res://Player/visual/chestoptions.gd" type="Script" id=26]
+[ext_resource path="res://Player/visual/chest.tres" type="SpriteFrames" id=27]
+[ext_resource path="res://Player/visual/chestoption.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Player/visual/container.gd" type="Script" id=34]
+[ext_resource path="res://Player/visual/hair/hair.gd" type="Script" id=35]
+[ext_resource path="res://Player/visual/hair/hairspr.tres" type="SpriteFrames" id=36]
+[ext_resource path="res://Player/visual/head/hairoption.tscn" type="PackedScene" id=53]
+
+[sub_resource type="Animation" id=1]
+resource_name = "focusall"
+tracks/0/type = "value"
+tracks/0/path = NodePath("visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 111.098, 179.038 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("visual:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, 7 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+tracks/0/type = "value"
+tracks/0/path = NodePath("visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 111, 180 ), Vector2( 127.935, 161.078 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("visual:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 7, 7 ), Vector2( 12.7998, 12.7998 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("visual:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 7, 7 ), Vector2( 12.7998, 12.7998 ), Vector2( 11.3054, 11.3054 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("visual:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 111, 180 ), Vector2( 108.457, 280.943 ), Vector2( 110.139, 297.761 ) ]
+}
+
+[node name="customize" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.411865
+margin_top = -4.42752
+margin_right = -0.411865
+margin_bottom = -4.42749
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center" type="Node2D" parent="."]
+position = Vector2( 511.376, 313.596 )
+script = ExtResource( 6 )
+sety = true
+setx = true
+scaleview = Vector2( 0.5, 0.5 )
+
+[node name="right" type="TextureButton" parent="center"]
+margin_left = 158.25
+margin_top = -40.1806
+margin_right = 173.25
+margin_bottom = -25.1806
+rect_scale = Vector2( 5, 5 )
+rect_pivot_offset = Vector2( 15, 8.37474 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="down" type="TextureButton" parent="center"]
+margin_left = -36.7589
+margin_top = 161.445
+margin_right = -21.7589
+margin_bottom = 176.445
+rect_rotation = 90.0
+rect_scale = Vector2( 5, 5 )
+rect_pivot_offset = Vector2( 15, 8.37474 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="up" type="TextureButton" parent="center"]
+margin_left = -28.6616
+margin_top = -263.882
+margin_right = -13.6616
+margin_bottom = -248.882
+rect_rotation = 270.0
+rect_scale = Vector2( 5, 5 )
+rect_pivot_offset = Vector2( 15, 8.37474 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="TextureButton" parent="center"]
+margin_left = -226.737
+margin_top = -42.5094
+margin_right = -211.737
+margin_bottom = -27.5094
+rect_scale = Vector2( -5, 5 )
+rect_pivot_offset = Vector2( 15, 8.37474 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="container" type="Control" parent="center"]
+margin_left = -131.0
+margin_top = -176.0
+margin_right = 94.0
+margin_bottom = 93.0
+rect_clip_content = true
+script = ExtResource( 34 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="visual" parent="center/container" instance=ExtResource( 3 )]
+position = Vector2( 111.098, 179.038 )
+scale = Vector2( 7, 7 )
+frame = 0
+player_cosmetics = {
+"aimingeye": false,
+"angried": false,
+"diseased": false
+}
+
+[node name="player" type="AnimationPlayer" parent="center/container"]
+anims/focusall = SubResource( 1 )
+anims/focusbody = SubResource( 2 )
+anims/focushead = SubResource( 3 )
+
+[node name="verticalcenter" type="Node2D" parent="."]
+position = Vector2( 1.05945, 281.817 )
+script = ExtResource( 6 )
+sety = true
+scaleview = Vector2( 1, 0.5 )
+
+[node name="categories" type="VBoxContainer" parent="verticalcenter"]
+margin_left = 69.8796
+margin_top = -45.7131
+margin_right = 228.88
+margin_bottom = 49.2869
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+toplayer = NodePath("../../center/container/player")
+
+[node name="head" type="Button" parent="verticalcenter/categories"]
+margin_right = 159.0
+margin_bottom = 20.0
+text = "head"
+
+[node name="hair" type="Button" parent="verticalcenter/categories"]
+margin_top = 24.0
+margin_right = 159.0
+margin_bottom = 44.0
+text = "hair"
+
+[node name="body" type="Button" parent="verticalcenter/categories"]
+margin_top = 48.0
+margin_right = 159.0
+margin_bottom = 68.0
+text = "body"
+
+[node name="acessories" type="Button" parent="verticalcenter/categories"]
+margin_top = 72.0
+margin_right = 159.0
+margin_bottom = 92.0
+text = "acessories"
+
+[node name="topright" type="Node2D" parent="."]
+position = Vector2( 1023.48, 2.99359 )
+script = ExtResource( 6 )
+setx = true
+
+[node name="options" type="Panel" parent="topright"]
+margin_left = -346.0
+margin_bottom = 604.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+toplayer = NodePath("../../center/container/player")
+
+[node name="back" type="Button" parent="topright/options"]
+margin_left = 295.59
+margin_top = 9.53517
+margin_right = 336.59
+margin_bottom = 29.5352
+text = "back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="head" type="ScrollContainer" parent="topright/options"]
+margin_left = 26.0
+margin_top = 35.0
+margin_right = 326.0
+margin_bottom = 579.0
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="options" type="VBoxContainer" parent="topright/options/head"]
+margin_right = 216.0
+margin_bottom = 390.0
+custom_constants/separation = 3
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tovisual = NodePath("../../../../center/container/visual")
+
+[node name="eyecolortitle" type="Label" parent="topright/options/head/options"]
+margin_right = 216.0
+margin_bottom = 14.0
+text = "eye color:"
+
+[node name="eyecolors" type="GridContainer" parent="topright/options/head/options"]
+margin_top = 17.0
+margin_right = 216.0
+margin_bottom = 57.0
+mouse_filter = 0
+columns = 5
+
+[node name="switcher" type="Node" parent="topright/options/head/options/eyecolors"]
+script = ExtResource( 11 )
+selectionname = "eyebase"
+default = 4
+
+[node name="green" type="Button" parent="topright/options/head/options/eyecolors"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+toggle_mode = true
+
+[node name="ColorRect" type="ColorRect" parent="topright/options/head/options/eyecolors/green"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 36.0
+margin_bottom = 36.0
+mouse_filter = 2
+color = Color( 0.188235, 0.423529, 0.12549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="blue" type="Button" parent="topright/options/head/options/eyecolors"]
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+toggle_mode = true
+
+[node name="ColorRect" type="ColorRect" parent="topright/options/head/options/eyecolors/blue"]
+margin_left = 3.33252
+margin_top = 3.33258
+margin_right = 35.3325
+margin_bottom = 35.3326
+mouse_filter = 2
+color = Color( 0.105882, 0.0901961, 0.537255, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="yellow" type="Button" parent="topright/options/head/options/eyecolors"]
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+toggle_mode = true
+
+[node name="ColorRect" type="ColorRect" parent="topright/options/head/options/eyecolors/yellow"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 36.0
+margin_bottom = 36.0
+mouse_filter = 2
+color = Color( 0.65098, 0.615686, 0.121569, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="brown" type="Button" parent="topright/options/head/options/eyecolors"]
+margin_left = 132.0
+margin_right = 172.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+toggle_mode = true
+
+[node name="ColorRect" type="ColorRect" parent="topright/options/head/options/eyecolors/brown"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 36.0
+margin_bottom = 36.0
+mouse_filter = 2
+color = Color( 0.254902, 0.168627, 0.117647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="celest" type="Button" parent="topright/options/head/options/eyecolors"]
+margin_left = 176.0
+margin_right = 216.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+toggle_mode = true
+
+[node name="ColorRect" type="ColorRect" parent="topright/options/head/options/eyecolors/celest"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 36.0
+margin_bottom = 36.0
+mouse_filter = 2
+color = Color( 0.176471, 0.603922, 0.686275, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="eyelight" type="Control" parent="topright/options/head/options"]
+margin_top = 60.0
+margin_right = 216.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 150, 210 )
+rect_clip_content = true
+
+[node name="clip" type="Control" parent="topright/options/head/options/eyelight"]
+margin_left = 40.7998
+margin_top = 53.5455
+margin_right = 222.8
+margin_bottom = 164.545
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lightpic" type="ColorPicker" parent="topright/options/head/options/eyelight/clip"]
+margin_left = 64.4893
+margin_top = 10.0118
+margin_right = 372.489
+margin_bottom = 422.012
+rect_scale = Vector2( 0.608683, 0.608683 )
+mouse_filter = 2
+color = Color( 0.3328, 0.64, 0.59904, 1 )
+edit_alpha = false
+presets_enabled = false
+presets_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="headstyles" type="Label" parent="topright/options/head/options"]
+margin_top = 273.0
+margin_right = 216.0
+margin_bottom = 287.0
+text = "head styles:"
+
+[node name="headoptions" type="GridContainer" parent="topright/options/head/options"]
+margin_top = 290.0
+margin_right = 216.0
+margin_bottom = 390.0
+columns = 3
+script = ExtResource( 10 )
+tovisual = NodePath("../../../../../center/container/visual")
+optionscn = ExtResource( 9 )
+optionsname = "heads"
+default = ExtResource( 12 )
+
+[node name="switcher" type="Node" parent="topright/options/head/options/headoptions"]
+script = ExtResource( 11 )
+selectionname = "heads"
+default = 1
+
+[node name="dirty2" parent="topright/options/head/options/headoptions" instance=ExtResource( 9 )]
+
+[node name="body" type="ScrollContainer" parent="topright/options"]
+visible = false
+margin_left = 16.0
+margin_top = 38.0
+margin_right = 332.0
+margin_bottom = 583.0
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="options" type="VBoxContainer" parent="topright/options/body"]
+margin_right = 90.0
+margin_bottom = 88.0
+
+[node name="title" type="Label" parent="topright/options/body/options"]
+margin_right = 90.0
+margin_bottom = 14.0
+text = "body"
+
+[node name="chestoptions" type="GridContainer" parent="topright/options/body/options"]
+margin_top = 18.0
+margin_right = 90.0
+margin_bottom = 88.0
+columns = 3
+script = ExtResource( 26 )
+tovisual = NodePath("../../../../../center/container/visual")
+optionscn = ExtResource( 28 )
+optionsname = "chests"
+default = ExtResource( 27 )
+
+[node name="switcher" type="Node" parent="topright/options/body/options/chestoptions"]
+script = ExtResource( 11 )
+selectionname = "chests"
+default = 1
+
+[node name="chestoption" parent="topright/options/body/options/chestoptions" instance=ExtResource( 28 )]
+text = "head"
+
+[node name="hair" type="ScrollContainer" parent="topright/options"]
+visible = false
+margin_left = 13.0
+margin_top = 40.0
+margin_right = 295.0
+margin_bottom = 583.0
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="options" type="VBoxContainer" parent="topright/options/hair"]
+margin_right = 90.0
+margin_bottom = 220.0
+
+[node name="hairtitle" type="Label" parent="topright/options/hair/options"]
+margin_right = 90.0
+margin_bottom = 14.0
+text = "hair styles:"
+
+[node name="hair" type="GridContainer" parent="topright/options/hair/options"]
+margin_top = 18.0
+margin_right = 90.0
+margin_bottom = 108.0
+columns = 3
+script = ExtResource( 35 )
+tovisual = NodePath("../../../../../center/container/visual")
+optionscn = ExtResource( 53 )
+optionsname = "hair"
+default = ExtResource( 36 )
+animorder = [ "side", "back", "front" ]
+bydivission = true
+
+[node name="switcher" type="Node" parent="topright/options/hair/options/hair"]
+script = ExtResource( 11 )
+selectionname = "hair"
+default = 19
+
+[node name="option" parent="topright/options/hair/options/hair" instance=ExtResource( 53 )]
+
+[node name="facialtitle" type="Label" parent="topright/options/hair/options"]
+margin_top = 112.0
+margin_right = 90.0
+margin_bottom = 126.0
+text = "facial hair:"
+
+[node name="facial" type="GridContainer" parent="topright/options/hair/options"]
+margin_top = 130.0
+margin_right = 90.0
+margin_bottom = 220.0
+columns = 3
+script = ExtResource( 13 )
+tovisual = NodePath("../../../../../center/container/visual")
+optionscn = ExtResource( 15 )
+optionsname = "facialhair"
+default = ExtResource( 14 )
+
+[node name="switcher" type="Node" parent="topright/options/hair/options/facial"]
+script = ExtResource( 11 )
+selectionname = "facialhair"
+default = 3
+
+[node name="Button" parent="topright/options/hair/options/facial" instance=ExtResource( 15 )]
+
+[node name="extra" type="ScrollContainer" parent="topright/options"]
+visible = false
+margin_left = 28.0
+margin_top = 34.0
+margin_right = 330.0
+margin_bottom = 563.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="options" type="VBoxContainer" parent="topright/options/extra"]
+margin_right = 184.0
+margin_bottom = 98.0
+script = ExtResource( 18 )
+visual = NodePath("../../../../center/container/visual")
+
+[node name="monocletitle" type="Label" parent="topright/options/extra/options"]
+margin_right = 184.0
+margin_bottom = 14.0
+text = "monocle"
+
+[node name="monocles" type="GridContainer" parent="topright/options/extra/options"]
+margin_top = 18.0
+margin_right = 184.0
+margin_bottom = 98.0
+columns = 3
+
+[node name="switcher" type="Node" parent="topright/options/extra/options/monocles"]
+script = ExtResource( 11 )
+selectionname = "monocle"
+default = 2
+is2false = true
+
+[node name="monocle" type="Button" parent="topright/options/extra/options/monocles"]
+margin_right = 90.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 90, 80 )
+toggle_mode = true
+
+[node name="Sprite" type="Sprite" parent="topright/options/extra/options/monocles/monocle"]
+position = Vector2( 44.8985, 40.128 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 17 )
+
+[node name="monocle" type="AnimatedSprite" parent="topright/options/extra/options/monocles/monocle"]
+position = Vector2( 51.2247, 22.3723 )
+scale = Vector2( 4, 4 )
+frames = ExtResource( 16 )
+animation = "front"
+
+[node name="nomonocle" type="Button" parent="topright/options/extra/options/monocles"]
+margin_left = 94.0
+margin_right = 184.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 90, 80 )
+toggle_mode = true
+
+[node name="Sprite" type="Sprite" parent="topright/options/extra/options/monocles/nomonocle"]
+position = Vector2( 44.8985, 40.128 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 17 )
+
+[node name="console" parent="topright" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( -1.24109, 3.307 )
+bypress = true
+
+[node name="userpref" type="Button" parent="."]
+margin_left = 6.0
+margin_top = 9.0
+margin_right = 157.0
+margin_bottom = 29.0
+text = "load user preferences"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="botright" type="Node2D" parent="."]
+position = Vector2( 1024.98, 608.929 )
+script = ExtResource( 6 )
+sety = true
+setx = true
+
+[node name="back" type="Button" parent="botright"]
+margin_left = -139.871
+margin_top = -30.736
+margin_right = -15.8711
+margin_bottom = -10.736
+text = "back to the menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="center/right" to="center/container" method="_on_right_pressed"]
+[connection signal="pressed" from="center/down" to="center/container" method="_on_down_pressed"]
+[connection signal="pressed" from="center/up" to="center/container" method="_on_up_pressed"]
+[connection signal="pressed" from="center/left" to="center/container" method="_on_left_pressed"]
+[connection signal="walking" from="center/container/visual" to="center/container/visual/floordect" method="walking"]
+[connection signal="pressed" from="verticalcenter/categories/head" to="verticalcenter/categories" method="_on_head_pressed"]
+[connection signal="pressed" from="verticalcenter/categories/hair" to="verticalcenter/categories" method="_on_hair_pressed"]
+[connection signal="pressed" from="verticalcenter/categories/body" to="verticalcenter/categories" method="_on_body_pressed"]
+[connection signal="pressed" from="verticalcenter/categories/acessories" to="verticalcenter/categories" method="_on_acessories_pressed"]
+[connection signal="pressed" from="topright/options/back" to="topright/options" method="_on_back_pressed"]
+[connection signal="ready" from="topright/options/head/options" to="topright/options/head/options/eyecolors/switcher" method="connects"]
+[connection signal="selected" from="topright/options/head/options/eyecolors/switcher" to="topright/options/head/options" method="setcolor"]
+[connection signal="color_changed" from="topright/options/head/options/eyelight/clip/lightpic" to="topright/options/head/options" method="_on_lightpic_color_changed"]
+[connection signal="selected" from="topright/options/head/options/headoptions/switcher" to="topright/options/head/options/headoptions" method="_on_switcher_selected"]
+[connection signal="selected" from="topright/options/body/options/chestoptions/switcher" to="topright/options/body/options/chestoptions" method="_on_switcher_selected"]
+[connection signal="selected" from="topright/options/hair/options/hair/switcher" to="topright/options/hair/options/hair" method="_on_switcher_selected"]
+[connection signal="selected" from="topright/options/hair/options/facial/switcher" to="topright/options/hair/options/facial" method="_on_switcher_selected"]
+[connection signal="ready" from="topright/options/extra/options" to="topright/options/extra/options/monocles/switcher" method="connects"]
+[connection signal="selected" from="topright/options/extra/options/monocles/switcher" to="topright/options/extra/options" method="_on_switcher_selected"]
+[connection signal="pressed" from="userpref" to="." method="_on_userpref_pressed"]
+[connection signal="pressed" from="botright/back" to="." method="_on_back_pressed"]

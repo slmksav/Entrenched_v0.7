@@ -1,0 +1,164 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI/menu/join.gd" type="Script" id=1]
+[ext_resource path="res://UI/menu/host.gd" type="Script" id=2]
+[ext_resource path="res://UI/menu/menu.gd" type="Script" id=3]
+[ext_resource path="res://UI/aligners/aligner.gd" type="Script" id=4]
+[ext_resource path="res://Player/visual/customize.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/menu/mainmenuscreen.png" type="Texture" id=6]
+[ext_resource path="res://UI/debug/console.tscn" type="PackedScene" id=10]
+
+[node name="menu" type="Node"]
+script = ExtResource( 3 )
+world_select = "res://World.tscn"
+customizer = ExtResource( 5 )
+
+[node name="staticcenter" type="Node2D" parent="."]
+position = Vector2( 504.203, 298.735 )
+script = ExtResource( 4 )
+sety = true
+setx = true
+scaleview = Vector2( 0.5, 0.5 )
+offset = Vector2( 0.5, 0.5 )
+scaleonmin = false
+scales = true
+
+[node name="background" type="Sprite" parent="staticcenter"]
+position = Vector2( 1.9425, 2.02246 )
+scale = Vector2( 0.29124, 0.29124 )
+texture = ExtResource( 6 )
+
+[node name="topright" type="Node2D" parent="."]
+position = Vector2( 1025.66, -1.63319 )
+script = ExtResource( 4 )
+setx = true
+
+[node name="console" parent="topright" instance=ExtResource( 10 )]
+position = Vector2( 1.33948, -0.808469 )
+bypress = true
+
+[node name="botleft" type="Node2D" parent="."]
+position = Vector2( 12.5116, 592.645 )
+script = ExtResource( 4 )
+sety = true
+scaleview = Vector2( 0, 1 )
+scales = true
+
+[node name="port" type="Label" parent="botleft"]
+margin_left = 8.51045
+margin_top = -37.9693
+margin_right = 48.5105
+margin_bottom = -23.9692
+text = "port"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="players" type="Label" parent="botleft"]
+margin_left = 8.03875
+margin_top = -20.0447
+margin_right = 48.0388
+margin_bottom = -6.04472
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="loading" type="ProgressBar" parent="botleft"]
+margin_left = 5.74916
+margin_top = -55.5153
+margin_right = 95.7492
+margin_bottom = -41.5153
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="topleft" type="Node2D" parent="."]
+script = ExtResource( 4 )
+scales = true
+
+[node name="title" type="Label" parent="topleft"]
+margin_left = 2.94056
+margin_top = 0.849689
+margin_right = 71.9406
+margin_bottom = 14.8497
+text = "project331"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join" type="Button" parent="topleft"]
+margin_left = 2.48378
+margin_top = 28.6675
+margin_right = 38.4838
+margin_bottom = 48.6675
+text = "join"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ip" type="LineEdit" parent="topleft/join"]
+margin_left = 55.0
+margin_top = -3.0
+margin_right = 154.0
+margin_bottom = 21.0
+text = "127.0.0.1"
+placeholder_text = "ip"
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="port" type="SpinBox" parent="topleft/join"]
+margin_left = 159.98
+margin_top = -3.13423
+margin_right = 233.98
+margin_bottom = 20.8658
+max_value = 70000.0
+value = 3000.0
+rounded = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="host" type="Button" parent="topleft"]
+margin_left = 1.94158
+margin_top = 52.913
+margin_right = 41.9416
+margin_bottom = 72.913
+text = "host"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="single" type="Button" parent="topleft"]
+margin_left = 2.21799
+margin_top = 76.1996
+margin_right = 91.218
+margin_bottom = 96.1996
+text = "singleplayer"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="botright" type="Node2D" parent="."]
+position = Vector2( 1024.06, 598.527 )
+script = ExtResource( 4 )
+sety = true
+setx = true
+
+[node name="customize" type="Button" parent="botright"]
+margin_left = -113.25
+margin_top = -31.25
+margin_right = -101.25
+margin_bottom = -11.25
+text = "set carachter"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="topleft/single" to="." method="singlepressed"]
+[connection signal="pressed" from="botright/customize" to="." method="_on_customize_pressed"]

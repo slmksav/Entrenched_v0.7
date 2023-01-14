@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/debug/output.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/debug/blocks/arrayblock.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[node name="arrayblock" type="Panel"]
+margin_top = 1.0
+margin_right = 179.0
+margin_bottom = 96.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+typename = "array"
+
+[node name="args" type="Control" parent="."]
+margin_left = 14.0013
+margin_top = 61.0774
+margin_right = 54.0013
+margin_bottom = 101.077
+
+[node name="return" parent="." instance=ExtResource( 1 )]
+margin_left = 138.123
+margin_top = 22.3713
+margin_right = 155.123
+margin_bottom = 42.3713
+savename = "result"
+
+[node name="size" type="SpinBox" parent="."]
+margin_left = 2.71111
+margin_top = 19.773
+margin_right = 104.711
+margin_bottom = 43.773
+max_value = 9.0
+rounded = true
+prefix = "size"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move" type="Button" parent="."]
+margin_left = -6.18061
+margin_top = -4.06473
+margin_right = 41.8194
+margin_bottom = 15.9353
+text = "move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="Button" parent="move"]
+margin_left = 41.6717
+margin_top = -16.0132
+margin_right = 60.6717
+margin_bottom = 3.98685
+text = "x"
+
+[connection signal="needsfill" from="return" to="." method="_on_return_needsfill"]
+[connection signal="value_changed" from="size" to="." method="_on_size_value_changed"]
+[connection signal="button_down" from="move" to="." method="_on_move_button_down"]
+[connection signal="button_up" from="move" to="." method="_on_move_button_up"]
+[connection signal="pressed" from="move/quit" to="." method="quit"]

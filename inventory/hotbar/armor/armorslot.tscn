@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://inventory/hotbar/armor/armorslot.gd" type="Script" id=1]
+[ext_resource path="res://inventory/hotbar/vertical/vslot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://inventory/hotbar/armor/hp.gd" type="Script" id=3]
+[ext_resource path="res://inventory/hotbar/vertical/down.png" type="Texture" id=4]
+
+[node name="slot" instance=ExtResource( 2 )]
+margin_right = 24.0
+texture = ExtResource( 4 )
+patch_margin_bottom = 5
+script = ExtResource( 1 )
+syncrect = [ "drag", "icon", "select" ]
+marginsl = [ Vector2( 4, 4 ), Vector2( 5, 0 ) ]
+marginr = [ Vector2( 4, 4 ), Vector2( 1, 5 ) ]
+place = 2
+
+[node name="drag" parent="." index="0"]
+margin_right = 20.0
+margin_bottom = 21.0
+
+[node name="icon" parent="." index="1"]
+margin_right = 20.0
+margin_bottom = 19.0
+
+[node name="select" parent="." index="2"]
+margin_right = 20.0
+margin_bottom = 19.0
+
+[node name="hp" type="ProgressBar" parent="." index="4"]
+margin_left = 2.14725
+margin_top = 1.28533
+margin_right = 59.1473
+margin_bottom = 15.2853
+rect_scale = Vector2( 0.373503, 0.373503 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="addeditem" from="." to="hp" method="_on_slot_addeditem"]
+[connection signal="removeditem" from="." to="hp" method="_on_slot_removeditem"]

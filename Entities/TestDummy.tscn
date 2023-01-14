@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Enemies/npc_parts/hand_orc.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/npc_parts/chestonly_orc.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/npc_parts/headonly_orc2.png" type="Texture" id=3]
+[ext_resource path="res://hitbox.gd" type="Script" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Entity
+
+func _ready():
+	connect(\"attacked\", self, \"_on_attacked\")
+	
+
+
+func customdamage(dmg: int, real:bool):
+	if real:
+		print(\"has taken a total of %s damage\" % dmg)
+
+
+"
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 14, 10 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8.00426, 7.61002 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6.32057, 4.66356 )
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 5.55257
+height = 4.9606
+
+[node name="TestDummy" type="KinematicBody2D" groups=["enemy"]]
+script = SubResource( 1 )
+god_mode = true
+
+[node name="body" type="AnimatedSprite" parent="."]
+position = Vector2( 0.367891, -4.83515 )
+frames = SubResource( 3 )
+
+[node name="head" type="Sprite" parent="body"]
+position = Vector2( 0.267174, -12.3099 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 2, 2, 18, 16.8636 )
+
+[node name="headhit" type="Area2D" parent="body/head"]
+position = Vector2( -0.337328, 0.874817 )
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 4 )
+totarget = NodePath("../../..")
+damagemultiplier = 1.2
+
+[node name="col" type="CollisionShape2D" parent="body/head/headhit"]
+position = Vector2( -0.420921, -0.982155 )
+shape = SubResource( 4 )
+
+[node name="hand" type="Sprite" parent="body"]
+position = Vector2( -9.51366, -2.15544 )
+texture = ExtResource( 1 )
+
+[node name="bodyhit" type="Area2D" parent="body"]
+position = Vector2( -0.280615, 1.05231 )
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 4 )
+totarget = NodePath("../..")
+protectedby = 1
+
+[node name="col" type="CollisionShape2D" parent="body/bodyhit"]
+position = Vector2( 0, -0.84185 )
+shape = SubResource( 5 )
+
+[node name="col" type="CollisionShape2D" parent="."]
+position = Vector2( 0.075794, -0.0242963 )
+rotation = 1.57102
+shape = SubResource( 6 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 42.0
+margin_bottom = -26.0
+text = "Test Dummy"
+__meta__ = {
+"_edit_use_anchors_": true
+}

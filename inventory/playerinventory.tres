@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://inventory/inventory.gd" type="Script" id=1]
+[ext_resource path="res://weapons/item/sarissa.tres" type="Resource" id=2]
+[ext_resource path="res://weapons/item/axe.tres" type="Resource" id=3]
+[ext_resource path="res://weapons/item/arquebus.tres" type="Resource" id=4]
+[ext_resource path="res://weapons/item/torch.tres" type="Resource" id=5]
+[ext_resource path="res://foods/herb/herb.tres" type="Resource" id=6]
+
+[resource]
+script = ExtResource( 1 )
+doescap = false
+max_weight = 20.0
+items = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ) ]
+balance = 14

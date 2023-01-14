@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UI/debug/blocks/monitor.gd" type="Script" id=1]
+[ext_resource path="res://UI/debug/input.gd" type="Script" id=2]
+[ext_resource path="res://UI/debug/input.png" type="Texture" id=3]
+[ext_resource path="res://UI/font/AnonymousPro-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://UI/debug/output.gd" type="Script" id=5]
+[ext_resource path="res://UI/debug/output.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.698039, 0.533333, 0.0588235, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 4 )
+
+[node name="monitor" type="Panel"]
+margin_right = 240.0
+margin_bottom = 120.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+typename = "monitor"
+
+[node name="from" type="Label" parent="."]
+margin_left = 64.925
+margin_top = 8.96867
+margin_right = 104.925
+margin_bottom = 22.9687
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "from"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="executer" type="Button" parent="."]
+margin_left = 42.8349
+margin_top = 3.85237
+margin_right = 60.8349
+margin_bottom = 23.8524
+icon = ExtResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+savename = "fromobject"
+
+[node name="varname" type="LineEdit" parent="."]
+margin_left = 2.64659
+margin_top = 31.3612
+margin_right = 159.647
+margin_bottom = 55.3612
+placeholder_text = "variable name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="value" type="RichTextLabel" parent="."]
+margin_left = 3.0
+margin_top = 62.0
+margin_right = 235.0
+margin_bottom = 105.0
+focus_mode = 2
+custom_fonts/normal_font = SubResource( 2 )
+text = "value.."
+selection_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start" type="Button" parent="."]
+margin_left = 191.543
+margin_top = 25.7982
+margin_right = 232.543
+margin_bottom = 45.7982
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move" type="Button" parent="."]
+margin_left = -11.3088
+margin_top = -10.9554
+margin_right = 36.6912
+margin_bottom = 9.04459
+text = "move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="delete" type="Button" parent="."]
+margin_left = 31.0899
+margin_top = -25.4712
+margin_right = 50.0899
+margin_bottom = -5.47123
+text = "x"
+
+[node name="getval" type="Button" parent="."]
+margin_left = 229.902
+margin_top = 105.768
+margin_right = 246.902
+margin_bottom = 125.768
+icon = ExtResource( 6 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="delete" to="." method="quit"]
+[connection signal="needsfill" from="getval" to="." method="_on_getval_needsfill"]

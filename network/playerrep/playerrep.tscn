@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/visualtree.tscn" type="PackedScene" id=1]
+[ext_resource path="res://network/playerrep/playerrep.gd" type="Script" id=2]
+[ext_resource path="res://network/playerrep/life.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.55632, 3.53604 )
+
+[node name="playerrep" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="visual" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0.200638, -5.2564 )
+frame = 2
+player_cosmetics = {
+"aimingeye": false,
+"angried": false,
+"diseased": false
+}
+
+[node name="blink" parent="visual/chest/head" index="3"]
+frame = 38
+
+[node name="aimingeye" parent="visual/chest/head/cosmetics" index="0"]
+visible = false
+
+[node name="angried" parent="visual/chest/head/cosmetics" index="1"]
+visible = false
+
+[node name="diseased" parent="visual/chest/head/cosmetics" index="2"]
+visible = false
+
+[node name="hit" parent="visual/chest/head" index="9"]
+totarget = NodePath("../../../..")
+
+[node name="hit" parent="visual/chest" index="2"]
+totarget = NodePath("../../..")
+
+[node name="col" type="CollisionShape2D" parent="."]
+position = Vector2( -0.311369, -1.07265 )
+shape = SubResource( 1 )
+
+[node name="life" type="ProgressBar" parent="."]
+margin_left = 0.798382
+margin_top = -34.0289
+margin_right = 65.7984
+margin_bottom = -19.0289
+rect_scale = Vector2( 0.312607, 0.312607 )
+mouse_filter = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="updated_health" from="." to="life" method="_on_playerrep_updated_health"]
+
+[editable path="visual"]

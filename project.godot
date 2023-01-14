@@ -1,0 +1,353 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "Ammo",
+"language": "GDScript",
+"path": "res://inventory/custom_items/ammo.gd"
+}, {
+"base": "Resource",
+"class": "Armor",
+"language": "GDScript",
+"path": "res://character_items/armors/armor.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://Entities/Entity.gd"
+}, {
+"base": "Node",
+"class": "GlobalWorld",
+"language": "GDScript",
+"path": "res://World/GlobalWorld.gd"
+}, {
+"base": "onhandrep",
+"class": "Gun",
+"language": "GDScript",
+"path": "res://weapons/Guns.gd"
+}, {
+"base": "Resource",
+"class": "Health",
+"language": "GDScript",
+"path": "res://health.gd"
+}, {
+"base": "Area2D",
+"class": "HitBox",
+"language": "GDScript",
+"path": "res://hitbox.gd"
+}, {
+"base": "Resource",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://inventory/inventory.gd"
+}, {
+"base": "Resource",
+"class": "Item",
+"language": "GDScript",
+"path": "res://inventory/item.gd"
+}, {
+"base": "onhandrep",
+"class": "Melee",
+"language": "GDScript",
+"path": "res://weapons/melee/melee.gd"
+}, {
+"base": "Node",
+"class": "PingNet",
+"language": "GDScript",
+"path": "res://network/Ping.gd"
+}, {
+"base": "HTTPClient",
+"class": "PlayFabHTTPClient",
+"language": "GDScript",
+"path": "res://singletons/PlayFabSDK/PlayFabHttpClient.gd"
+}, {
+"base": "movingentity",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player/Player.gd"
+}, {
+"base": "damager",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://weapons/projectiles/projectile.gd"
+}, {
+"base": "Node",
+"class": "SyncNode",
+"language": "GDScript",
+"path": "res://network/sync_node.gd"
+}, {
+"base": "Thread",
+"class": "ThreadEx",
+"language": "GDScript",
+"path": "res://singletons/thread_ex.gd"
+}, {
+"base": "Node2D",
+"class": "aligner",
+"language": "GDScript",
+"path": "res://UI/aligners/aligner.gd"
+}, {
+"base": "Node",
+"class": "animer",
+"language": "GDScript",
+"path": "res://Player/animator.gd"
+}, {
+"base": "Area2D",
+"class": "damager",
+"language": "GDScript",
+"path": "res://Entities/damager/damager.gd"
+}, {
+"base": "Button",
+"class": "input",
+"language": "GDScript",
+"path": "res://UI/debug/input.gd"
+}, {
+"base": "Entity",
+"class": "movingentity",
+"language": "GDScript",
+"path": "res://Entities/movingentity.gd"
+}, {
+"base": "Resource",
+"class": "onhanditem",
+"language": "GDScript",
+"path": "res://inventory/hotbar/onhanditem.gd"
+}, {
+"base": "Node2D",
+"class": "onhandrep",
+"language": "GDScript",
+"path": "res://inventory/hotbar/onhandscn.gd"
+}, {
+"base": "Button",
+"class": "output",
+"language": "GDScript",
+"path": "res://UI/debug/output.gd"
+}, {
+"base": "AudioStreamPlayer2D",
+"class": "sfxer",
+"language": "GDScript",
+"path": "res://weapons/scenes/sfx.gd"
+}, {
+"base": "Node",
+"class": "switcher",
+"language": "GDScript",
+"path": "res://Player/visual/buttonswitch.gd"
+}, {
+"base": "CollisionShape2D",
+"class": "syncedshape",
+"language": "GDScript",
+"path": "res://Player/physics/syncshape.gd"
+}, {
+"base": "Node",
+"class": "weaponcontrol",
+"language": "GDScript",
+"path": "res://weapons/onplayer.gd"
+} ]
+_global_script_class_icons={
+"Ammo": "res://weapons/projectiles/ammosimbol.png",
+"Armor": "",
+"Entity": "res://Entities/spr.png",
+"GlobalWorld": "",
+"Gun": "",
+"Health": "",
+"HitBox": "res://Entities/damager/hitbox.png",
+"Inventory": "res://inventory/bagicon.png",
+"Item": "",
+"Melee": "",
+"PingNet": "",
+"PlayFabHTTPClient": "",
+"Player": "res://Player/classicon.png",
+"Projectile": "res://weapons/projectiles/projectileclass.png",
+"SyncNode": "res://network/syncerclass.png",
+"ThreadEx": "res://singletons/threadexspr.png",
+"aligner": "res://UI/aligners/extendericon.png",
+"animer": "res://Player/visual/animer.png",
+"damager": "res://Entities/damager/classicon.png",
+"input": "res://UI/debug/input.png",
+"movingentity": "res://Entities/moving.png",
+"onhanditem": "",
+"onhandrep": "res://inventory/hotbar/holdable.png",
+"output": "res://UI/debug/output.png",
+"sfxer": "",
+"switcher": "res://Player/visual/switcher.png",
+"syncedshape": "res://Player/physics/colsimbol.png",
+"weaponcontrol": "res://weapons/onplayerclass.png"
+}
+
+[application]
+
+config/name="Project New Game "
+run/main_scene="res://init_scene/InitScene.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+PlayFabSettings="*res://singletons/PlayFabSDK/PlayFabSettings.gd"
+PlayFab="*res://singletons/PlayFabSDK/PlayFab.gd"
+interacter="*res://World/interacter.gd"
+SceneManager="*res://scene_manager.gd"
+server="*res://network/server.tscn"
+globals="*res://singletons/globals.tscn"
+settings="*res://singletons/settings.gd"
+math="*res://singletons/math.gd"
+Multiplayer="*res://singletons/networking/Multiplayer.gd"
+smartinput="*res://singletons/smartinput.tscn"
+UserData="*res://singletons/user_data/UserData.tscn"
+Auth="*res://singletons/user_data/Auth.gd"
+ServerData="*res://singletons/networking/server_data.gd"
+ServerComand="*res://singletons/networking/server_comand.gd"
+visualprefs="*res://Player/visual/visualprefs.tscn"
+CacheNodes="*res://singletons/cache_nodes.gd"
+
+[debug]
+
+settings/fps/force_fps=60
+multirun/number_of_windows=2
+multirun/window_distance=500
+multirun/add_custom_args=true
+multirun/first_window_args="listen hostdedicated force_dedicate_server_mode"
+multirun/other_window_args="join"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[input]
+
+inventory={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+console={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777235,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+deploy={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+inventorymove={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":72,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+reload={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+cinematic_mode={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+aim={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+sit={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":46,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="default"
+2d_physics/layer_2="playeronly"
+2d_physics/layer_3="noplayer"
+2d_physics/layer_4="floortypes"
+2d_physics/layer_5="damage"
+2d_physics/layer_6="weapons"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/subsurface_scattering/quality=0
+environment/default_environment="res://default_env.tres"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/hair/facial hair/gentleman_black_spr.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Player/eye.png" type="Texture" id=2]
+[ext_resource path="res://Player/headonly7.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 44, 0, 22, 19 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "front",
+"speed": 5.0
+} ]
+
+[node name="head5" type="AnimatedSprite"]
+position = Vector2( 0.140804, -0.140804 )
+frames = SubResource( 2 )
+animation = "front"
+
+[node name="eyeright" type="Sprite" parent="."]
+position = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -1 )
+
+[node name="eyeleft" type="Sprite" parent="."]
+position = Vector2( -3.5, 1.5 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -1 )
+
+[node name="facialhair" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 4 )
+frames = ExtResource( 1 )
+animation = "front"
+offset = Vector2( 0, -1 )

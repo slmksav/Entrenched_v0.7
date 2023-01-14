@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://singletons/smartinput.gd" type="Script" id=1]
+
+[node name="smartinput" type="Node"]
+script = ExtResource( 1 )
+keeptrackof = [ "move_up", "move_down", "move_left", "move_right" ]

@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Node2D
+
+onready var particles1: CPUParticles2D = $CPUParticles2D
+onready var particles2: CPUParticles2D = $CPUParticles2D2
+
+
+func _ready():
+	set_process(false)
+	set_process_input(false)
+	set_process_unhandled_input(false)
+	set_process_unhandled_key_input(false)
+
+
+func start():
+	particles1.emitting = true
+	yield(get_tree().create_timer(particles1.lifetime + 0.1), \"timeout\")
+	particles2.emitting = true
+	
+
+"
+
+[sub_resource type="Curve" id=1]
+max_value = 2.0
+_data = [ Vector2( 0, 0.309091 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.54545 ), 0.615174, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.69163, 0.929515 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.427313, 0.84141 )
+colors = PoolColorArray( 0.746094, 0.746094, 0.746094, 1, 0.992157, 0.992157, 0.992157, 0 )
+
+[node name="DeadParticles" type="Node2D"]
+script = SubResource( 4 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 0.95
+lifetime_randomness = 0.48
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2( 0, -1 )
+spread = 120.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 50.0
+damping = 52.27
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 64
+randomness = 1.0
+lifetime_randomness = 1.0
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_align_y = true
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 7.58
+initial_velocity_random = 1.0
+orbit_velocity = 0.1
+orbit_velocity_random = 1.0
+radial_accel = 18.18
+color_ramp = SubResource( 3 )

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://character_items/armors/armor.gd" type="Script" id=1]
+[ext_resource path="res://character_items/armors/strawhat/movement_chart_strawhat.png" type="Texture" id=2]
+[ext_resource path="res://character_items/armors/strawhat/strawsprite.tres" type="SpriteFrames" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 6, 23, 14 )
+
+[resource]
+script = ExtResource( 1 )
+cost = 3
+icon = SubResource( 1 )
+name = "strawhat"
+weight = 3.0
+amount = 1
+maxamount = 5
+sellable = false
+helmet = ExtResource( 3 )
+maxhp = 12.0
+standarddamage = 10
+hairwithhelmet = true
+defense = 0.0

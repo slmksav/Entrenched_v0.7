@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://character_items/armors/armor.gd" type="Script" id=1]
+[ext_resource path="res://character_items/armors/coverhelmet/coverhelmet_spr.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://character_items/armors/coverhelmet/side.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+cost = 5
+icon = ExtResource( 3 )
+name = "cover helmet"
+weight = 5.0
+amount = 1
+maxamount = 5
+sellable = false
+helmet = ExtResource( 2 )
+maxhp = 12.0
+standarddamage = 10
+hairwithhelmet = false
+defense = 0.0

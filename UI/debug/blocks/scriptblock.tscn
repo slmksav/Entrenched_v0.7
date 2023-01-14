@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/debug/blocks/scriptblock.gd" type="Script" id=1]
+[ext_resource path="res://UI/debug/output.gd" type="Script" id=2]
+[ext_resource path="res://UI/debug/output.png" type="Texture" id=3]
+[ext_resource path="res://UI/debug/blocks/executer.gd" type="Script" id=4]
+
+[node name="script" type="Panel"]
+margin_right = 391.0
+margin_bottom = 266.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+typename = "script"
+
+[node name="text" type="TextEdit" parent="."]
+margin_left = 11.6818
+margin_top = 7.0
+margin_right = 382.682
+margin_bottom = 257.0
+custom_colors/member_variable_color = Color( 0.333333, 0.392157, 0.415686, 1 )
+custom_colors/function_color = Color( 0.027451, 0.647059, 0.658824, 1 )
+custom_colors/safe_line_number_color = Color( 0.34902, 0.2, 0.0509804, 1 )
+custom_colors/symbol_color = Color( 0.796078, 0.898039, 0.905882, 1 )
+custom_colors/breakpoint_color = Color( 0.74902, 0.298039, 0.298039, 1 )
+custom_colors/brace_mismatch_color = Color( 0.392157, 0.137255, 0.137255, 1 )
+custom_colors/mark_color = Color( 0, 0, 0, 1 )
+custom_colors/word_highlighted_color = Color( 0.482353, 0.560784, 0.572549, 1 )
+custom_colors/completion_existing_color = Color( 0.682353, 0.85098, 0.690196, 1 )
+text = "extends Node
+
+func onrun():
+	pass"
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+draw_spaces = true
+breakpoint_gutter = true
+fold_gutter = true
+highlight_all_occurrences = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="executer" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="move" type="Button" parent="."]
+margin_left = -19.3494
+margin_top = -10.8546
+margin_right = 28.6506
+margin_bottom = 9.14543
+text = "move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="Button" parent="."]
+margin_left = 20.5
+margin_top = -25.625
+margin_right = 39.5
+margin_bottom = -5.625
+text = "x"
+
+[node name="run" type="Button" parent="."]
+margin_left = 375.514
+margin_top = -7.12719
+margin_right = 408.514
+margin_bottom = 12.8728
+text = "run"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="return" type="Button" parent="."]
+margin_left = 383.357
+margin_top = 253.984
+margin_right = 395.357
+margin_bottom = 273.984
+icon = ExtResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+savename = "return"
+
+[connection signal="pressed" from="quit" to="." method="quit"]
+[connection signal="pressed" from="run" to="." method="_on_run_pressed"]
+[connection signal="needsfill" from="return" to="." method="_on_return_needsfill"]

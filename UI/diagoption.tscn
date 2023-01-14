@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/diagoption.gd" type="Script" id=1]
+
+[node name="button" type="Button"]
+margin_left = -14.4503
+margin_top = -4.35637
+margin_right = 48.5497
+margin_bottom = 15.6436
+rect_scale = Vector2( 0.43082, 0.43082 )
+text = "option"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

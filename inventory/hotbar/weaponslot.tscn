@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://inventory/hotbar/weaponslot.gd" type="Script" id=1]
+[ext_resource path="res://inventory/hotbar/slot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://inventory/hotbar/images/rightslot.png" type="Texture" id=3]
+[ext_resource path="res://Player/handspr.tscn" type="PackedScene" id=4]
+
+[node name="slot" instance=ExtResource( 2 )]
+texture = ExtResource( 3 )
+patch_margin_right = 4
+script = ExtResource( 1 )
+syncrect = [ "drag", "icon", "select" ]
+place = 2
+hand = ExtResource( 4 )
+
+[node name="drag" parent="." index="0"]
+margin_right = 20.0
+
+[node name="icon" parent="." index="1"]
+margin_right = 20.0
+
+[node name="select" parent="." index="2"]
+margin_right = 20.0
+
+[connection signal="addeditem" from="." to="." method="_on_slot_addeditem"]
+[connection signal="removeditem" from="." to="." method="_on_slot_removeditem"]

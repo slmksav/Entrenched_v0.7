@@ -1,0 +1,151 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://UI/ServerBrowser/ServerInfo.gd" type="Script" id=1]
+[ext_resource path="res://UI/ServerBrowser/5ping.png" type="Texture" id=2]
+[ext_resource path="res://UI/ServerBrowser/3ping.png" type="Texture" id=3]
+[ext_resource path="res://UI/ServerBrowser/4ping.png" type="Texture" id=4]
+[ext_resource path="res://UI/ServerBrowser/unlocked.png" type="Texture" id=5]
+[ext_resource path="res://UI/ServerBrowser/2ping.png" type="Texture" id=6]
+[ext_resource path="res://UI/ServerBrowser/locked.png" type="Texture" id=7]
+[ext_resource path="res://UI/ServerBrowser/1ping.png" type="Texture" id=8]
+[ext_resource path="res://UI/ServerBrowser/serverbar_nonselected.png" type="Texture" id=9]
+[ext_resource path="res://UI/ServerBrowser/connect_nonselected.png" type="Texture" id=10]
+[ext_resource path="res://UI/ServerBrowser/connect_selected.png" type="Texture" id=11]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 9 )
+region_rect = Rect2( 0, 0, 544, 60 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "unlocked",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "locked",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "ping1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "ping2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "ping5",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "ping3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "ping4",
+"speed": 5.0
+} ]
+
+[node name="ServerInfo" type="Node"]
+script = ExtResource( 1 )
+server_name_path = NodePath("Control/PanelContainer/HBoxContainer/HBoxContainer2/server_name")
+players_path = NodePath("Control/PanelContainer/HBoxContainer/HBoxContainer/players_label")
+ping_path = NodePath("Control/PanelContainer/HBoxContainer/HBoxContainer/Control/ping")
+lock_path = NodePath("Control/PanelContainer/HBoxContainer/HBoxContainer2/Control/lock")
+join_server_path = NodePath("Control/PanelContainer/HBoxContainer/HBoxContainer/Connect_server")
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 0.08
+margin_right = -1024.0
+margin_bottom = -48.0
+rect_min_size = Vector2( 544, 60 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+rect_min_size = Vector2( 544, 60 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer"]
+margin_right = 544.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 544, 60 )
+custom_constants/separation = 90
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/PanelContainer/HBoxContainer"]
+margin_left = 9.0
+margin_right = 144.0
+margin_bottom = 60.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Control" type="Control" parent="Control/PanelContainer/HBoxContainer/HBoxContainer2"]
+margin_right = 20.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 20, 60 )
+
+[node name="lock" type="AnimatedSprite" parent="Control/PanelContainer/HBoxContainer/HBoxContainer2/Control"]
+frames = SubResource( 2 )
+animation = "unlocked"
+centered = false
+offset = Vector2( 0, 20 )
+
+[node name="server_name" type="Label" parent="Control/PanelContainer/HBoxContainer/HBoxContainer2"]
+margin_left = 40.0
+margin_top = 23.0
+margin_right = 135.0
+margin_bottom = 37.0
+text = "[SERVER NAME]"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/PanelContainer/HBoxContainer"]
+margin_left = 234.0
+margin_right = 534.0
+margin_bottom = 60.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Control" type="Control" parent="Control/PanelContainer/HBoxContainer/HBoxContainer"]
+margin_right = 26.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 26, 48 )
+
+[node name="ping" type="AnimatedSprite" parent="Control/PanelContainer/HBoxContainer/HBoxContainer/Control"]
+frames = SubResource( 3 )
+animation = "ping1"
+centered = false
+offset = Vector2( 0, 15 )
+
+[node name="players_label" type="Label" parent="Control/PanelContainer/HBoxContainer/HBoxContainer"]
+margin_left = 41.0
+margin_top = 23.0
+margin_right = 186.0
+margin_bottom = 37.0
+text = "[PLAYERS_CONNECTED]"
+
+[node name="Connect_server" type="TextureButton" parent="Control/PanelContainer/HBoxContainer/HBoxContainer"]
+margin_left = 201.0
+margin_top = 5.0
+margin_right = 300.0
+margin_bottom = 65.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )

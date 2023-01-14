@@ -1,0 +1,169 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/debug/blocks/funcblock.gd" type="Script" id=1]
+[ext_resource path="res://UI/debug/input.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/debug/output.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.25098, 0.341176, 0.839216, 1 )
+
+[node name="runblock" type="Panel"]
+margin_right = 250.0
+margin_bottom = 107.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+typename = "func"
+argument = ExtResource( 2 )
+
+[node name="funcname" type="LineEdit" parent="."]
+margin_left = 2.0
+margin_top = 22.0
+margin_right = 166.0
+margin_bottom = 46.0
+input_pass_on_modal_close_click = false
+placeholder_text = "function name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="argcount" type="SpinBox" parent="."]
+margin_left = 3.27502
+margin_top = 79.2246
+margin_right = 105.275
+margin_bottom = 103.225
+max_value = 9.0
+rounded = true
+suffix = "args"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="args" type="Control" parent="."]
+margin_left = 4.87259
+margin_top = 53.0776
+margin_right = 4.87259
+margin_bottom = 53.0776
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move" type="Button" parent="."]
+margin_left = -41.9835
+margin_top = -19.3269
+margin_right = 6.01646
+margin_bottom = 0.673111
+text = "move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="run" type="Button" parent="."]
+margin_left = 171.0
+margin_top = 22.0
+margin_right = 244.0
+margin_bottom = 42.0
+focus_mode = 0
+text = "run"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="return" parent="." instance=ExtResource( 3 )]
+margin_left = 190.948
+margin_top = 82.6121
+margin_right = 207.948
+margin_bottom = 102.612
+savename = "return"
+
+[node name="title" type="Label" parent="return"]
+margin_left = 22.3492
+margin_top = 4.5827
+margin_right = 62.3492
+margin_bottom = 18.5828
+rect_scale = Vector2( 0.730469, 0.730469 )
+text = "return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="from" parent="." instance=ExtResource( 2 )]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 21.0
+savename = "executer"
+
+[node name="title" type="Label" parent="from"]
+margin_left = 25.4792
+margin_top = 4.04432
+margin_right = 65.4792
+margin_bottom = 18.0443
+text = "from"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debugprint" type="CheckBox" parent="."]
+margin_left = 163.959
+margin_top = -2.68142
+margin_right = 187.959
+margin_bottom = 21.3186
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="debugprint"]
+margin_left = 22.4134
+margin_top = 6.68468
+margin_right = 91.4134
+margin_bottom = 20.6847
+rect_scale = Vector2( 0.6416, 0.6416 )
+text = "debugprint"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="Button" parent="."]
+margin_left = 1.5381
+margin_top = -33.591
+margin_right = 20.5381
+margin_bottom = -13.591
+text = "x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clients" type="Button" parent="."]
+margin_left = 170.641
+margin_top = 64.4691
+margin_right = 275.641
+margin_bottom = 84.4691
+rect_scale = Vector2( 0.7, 0.7 )
+text = "run on clients"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sync" type="Button" parent="."]
+margin_left = 170.886
+margin_top = 46.16
+margin_right = 275.886
+margin_bottom = 66.16
+rect_scale = Vector2( 0.7, 0.7 )
+text = "run on sync"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="text_entered" from="funcname" to="." method="_on_funcname_text_entered"]
+[connection signal="value_changed" from="argcount" to="." method="_on_argcount_value_changed"]
+[connection signal="pressed" from="run" to="." method="run" binds= [ true ]]
+[connection signal="needsfill" from="return" to="." method="_on_return_needsfill"]
+[connection signal="pressed" from="quit" to="." method="quit"]
+[connection signal="pressed" from="clients" to="." method="doremote"]
+[connection signal="pressed" from="sync" to="." method="run" binds= [ true ]]
+[connection signal="pressed" from="sync" to="." method="doremote"]

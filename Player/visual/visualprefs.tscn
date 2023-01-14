@@ -1,0 +1,70 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://Player/visual/visualprefs.gd" type="Script" id=1]
+[ext_resource path="res://Player/headonly.png" type="Texture" id=2]
+[ext_resource path="res://Player/headonly6.png" type="Texture" id=3]
+[ext_resource path="res://Player/headonly2.png" type="Texture" id=4]
+[ext_resource path="res://Player/headonly4.png" type="Texture" id=5]
+[ext_resource path="res://Player/headonly8.png" type="Texture" id=6]
+[ext_resource path="res://Player/headonly12.png" type="Texture" id=7]
+[ext_resource path="res://Player/headonly10.png" type="Texture" id=8]
+[ext_resource path="res://Player/headonly9.png" type="Texture" id=9]
+[ext_resource path="res://Player/headonly11.png" type="Texture" id=10]
+[ext_resource path="res://Player/headonly3.png" type="Texture" id=11]
+[ext_resource path="res://Player/headonly5.png" type="Texture" id=12]
+[ext_resource path="res://Player/headonly7.png" type="Texture" id=13]
+[ext_resource path="res://Player/hair/perruque/perruque_lightbrown.png" type="Texture" id=14]
+[ext_resource path="res://Player/hair/classyhair/classyhair_black.png" type="Texture" id=15]
+[ext_resource path="res://Player/chestonly_redshirt.png" type="Texture" id=16]
+[ext_resource path="res://Player/chestonly_rusty.png" type="Texture" id=17]
+[ext_resource path="res://Player/hair/cropped_hair/croppedhair_blond.png" type="Texture" id=18]
+[ext_resource path="res://Player/hair/classyhair/classyhair_blond.png" type="Texture" id=19]
+[ext_resource path="res://Player/hair/perruque/perruque_brown.png" type="Texture" id=20]
+[ext_resource path="res://Player/hair/cropped_hair/croppedhair_brown.png" type="Texture" id=21]
+[ext_resource path="res://Player/hair/classyhair/classyhair_brown.png" type="Texture" id=22]
+[ext_resource path="res://Player/hair/perruque/perruque_black.png" type="Texture" id=23]
+[ext_resource path="res://Player/hair/cropped_hair/croppedhair_black.png" type="Texture" id=24]
+[ext_resource path="res://Player/chestonly_cloak_sit.png" type="Texture" id=25]
+[ext_resource path="res://Player/chestonly_sit.png" type="Texture" id=26]
+[ext_resource path="res://Player/hair/default/darkbrown.png" type="Texture" id=27]
+[ext_resource path="res://Player/hair/default/blond.png" type="Texture" id=28]
+[ext_resource path="res://Player/hair/perruque/perruque_blond.png" type="Texture" id=29]
+[ext_resource path="res://Player/hair/perruque/perruque_ginger.png" type="Texture" id=30]
+[ext_resource path="res://Player/chestonly_dark.png" type="Texture" id=31]
+[ext_resource path="res://Player/hair/default/black.png" type="Texture" id=32]
+[ext_resource path="res://Player/hair/default/brown.png" type="Texture" id=33]
+[ext_resource path="res://Player/hair/cropped_hair/croppedhair_ginger.png" type="Texture" id=34]
+[ext_resource path="res://Player/hair/receedinghair/receedinghair_brown.png" type="Texture" id=35]
+[ext_resource path="res://Player/chestonly_rusty2.png" type="Texture" id=36]
+[ext_resource path="res://Player/hair/receedinghair/receedinghair_ginger.png" type="Texture" id=37]
+[ext_resource path="res://Player/hair/facial hair/gentleman_brown.png" type="Texture" id=38]
+[ext_resource path="res://Player/hair/facial hair/gentleman_black.png" type="Texture" id=39]
+[ext_resource path="res://Player/visual/headframe.tres" type="SpriteFrames" id=40]
+[ext_resource path="res://Player/visual/chest.tres" type="SpriteFrames" id=41]
+[ext_resource path="res://Player/visual/hair/hairspr.tres" type="SpriteFrames" id=42]
+[ext_resource path="res://Player/hair/facial hair/gentleman_black_spr.tres" type="SpriteFrames" id=43]
+[ext_resource path="res://Player/newhead.tscn" type="PackedScene" id=44]
+
+[node name="vp" type="Node"]
+script = ExtResource( 1 )
+alloptions = {
+"chests": [ ExtResource( 26 ), ExtResource( 25 ), ExtResource( 31 ), ExtResource( 16 ), ExtResource( 36 ), ExtResource( 17 ) ],
+"facialhair": [ ExtResource( 39 ), ExtResource( 38 ), null ],
+"hair": [ ExtResource( 15 ), ExtResource( 19 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 18 ), ExtResource( 21 ), ExtResource( 34 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 33 ), ExtResource( 27 ), ExtResource( 23 ), ExtResource( 29 ), ExtResource( 20 ), ExtResource( 30 ), ExtResource( 14 ), ExtResource( 35 ), ExtResource( 37 ), null ],
+"heads": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 3 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ) ]
+}
+defaulttres = {
+"chests": ExtResource( 41 ),
+"facialhair": ExtResource( 43 ),
+"hair": ExtResource( 42 ),
+"heads": ExtResource( 40 )
+}
+divisionsh_byoption = {
+"hair": 3
+}
+animorder_byoption = {
+"hair": [ "side", "back", "front" ]
+}
+scenebyhead = [ ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ) ]
+racebyhead = [ Color( 0.615686, 0.498039, 0.498039, 1 ), Color( 0.654902, 0.560784, 0.560784, 1 ), Color( 0.647059, 0.52549, 0.52549, 1 ), Color( 0.662745, 0.564706, 0.564706, 1 ), Color( 0.290196, 0.196078, 0.109804, 1 ), Color( 0.627451, 0.498039, 0.498039, 1 ), Color( 0.235294, 0.168627, 0.168627, 1 ), Color( 0.729412, 0.572549, 0.447059, 1 ), Color( 0.341176, 0.219608, 0.105882, 1 ), Color( 0.584314, 0.447059, 0.447059, 1 ), Color( 0.372549, 0.27451, 0.239216, 1 ), Color( 0.192157, 0.12549, 0.0980392, 1 ) ]
+keystoload = PoolStringArray( "eyecolor", "monocle" )

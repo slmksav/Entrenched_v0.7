@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://inventory/item.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+cost = 2
+icon = ExtResource( 2 )
+name = "some rock"
+weight = 5.0
+amount = 1
+sellable = true

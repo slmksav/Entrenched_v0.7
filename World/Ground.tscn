@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/ground.png-d63cde4d32c7d91236e0a5c07b77bbfa.stex"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ground" type="Sprite" parent="."]
+position = Vector2( -296, 710 )
+texture = SubResource( 1 )
