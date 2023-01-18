@@ -15,10 +15,7 @@ It had a working multiplayer as well, done with Azure's PlayFab.
 
 *A snippet of code*
 
-https://user-images.githubusercontent.com/87731856/213191611-e9885375-e637-4af1-be82-ee505a283b45.mp4
-*Working in theory*
-
-
+And in the end, it did work... in theory
 
 https://user-images.githubusercontent.com/87731856/213192202-8a368402-e22e-4214-93f7-5368f2060f07.mp4
 
