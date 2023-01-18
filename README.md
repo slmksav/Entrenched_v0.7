@@ -5,7 +5,6 @@ This video illustrates what was achieved in the project quite well:
 https://www.youtube.com/watch?v=tCAQGxNLRnE
 
 It had a working multiplayer as well, done with Azure's PlayFab.
-![unknown](https://user-images.githubusercontent.com/87731856/213190677-4c76faab-d47f-4429-bb96-157ab673bd8f.png)
 ![mp4](https://user-images.githubusercontent.com/87731856/213191189-439bf688-c977-4fdc-9f78-33b30c562829.jpg)
 
 *Multiple clients hosted on one local server*
