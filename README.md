@@ -1,5 +1,5 @@
 # Entrenched_v0.7
- A Godot Project from Sep 2022 - Nov 2022
+ A Godot Project from Sep 2022 - Nov 2022. A team consisting of me, Thepromaper (David) and Facundo was involved.
 
 This video illustrates what was achieved in the project quite well:
 https://www.youtube.com/watch?v=tCAQGxNLRnE
